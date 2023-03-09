@@ -10,9 +10,9 @@ fi
 RANDOM_UUID=$(cat /proc/sys/kernel/random/uuid)
 # Replace dashes "-" in uuid to "_"
 UUID=$(echo "$RANDOM_UUID" | tr - _)
-# Get macro from input
+# Get macro from input with underscore before capital letter
 MACRO=$(echo $1 | sed 's/[A-Z]\+/_&/g')
-# Caps the macro
+# Caps the macro and append _H
 ALLCAPSMACRO="${MACRO^^}_H"
 # Capitalize first letter of input
 CLASS_NAME="${1^}"
@@ -28,12 +28,15 @@ printf "class $CLASS_NAME {\n\tpublic:\n\t\t$CLASS_NAME();\n\t\tvirtual ~$CLASS_
 # Print endif
 printf "#endif\n" >> $1.h
 
-# Include iostream
-printf "#include <iostream>\n" >> $1.cpp
 # Include .h file
-printf "#include \"$1.h\"\n" >> $1.cpp
-# Include funny.h
-printf "#include \"utils/funny.h\"\n" >> $1.cpp
+printf "#include \"$1.h\"\n\n" >> $1.cpp
+
+#########
+# Add any other includes of your liking
+printf "#include <iostream>\n" >> $1.cpp # Include iostream
+printf "#include \"utils/funny.h\"\n" >> $1.cpp # Include funny.h
+#########
+
 # Newline
 printf "\n" >> $1.cpp
 # Add constructor and destructor empty definition
