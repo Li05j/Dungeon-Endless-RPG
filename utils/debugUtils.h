@@ -4,7 +4,7 @@
 /*
  * Bit flags for DEBUG()
  */
-#define DB_GENERAL      0x0001
+#define DB_GENERAL 0x0001
 // #define DB_SYSCALL     0x0002
 // #define DB_INTERRUPT   0x0004
 // #define DB_DEVICE      0x0008
@@ -26,7 +26,7 @@ extern unsigned int dbflags;
  * The idea is that you put lots of lines of the form
  *
  *      DEBUG(DB_VM, "VM free pages: %u\n", free_pages);
- * 
+ *
  * DEBUG is a varargs macro. These were added to the language in C99.
  */
 #define DEBUG(d, ...) ((dbflags & (d)) ? kprintf(__VA_ARGS__) : 0)

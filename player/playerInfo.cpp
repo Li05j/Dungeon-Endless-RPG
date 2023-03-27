@@ -6,3 +6,11 @@
 PlayerInfo::PlayerInfo() {}
 
 PlayerInfo::~PlayerInfo() {}
+
+void addMemberToParty(AllyClass player)
+{
+}
+
+void removeMemberFromParty(AllyClass player)
+{
+}

@@ -1,10 +1,20 @@
-#ifndef PLAYER_INFO_H_0bb8ae3d_d03a_4c6b_9ad9_f36a3a6b95e1
-#define PLAYER_INFO_H_0bb8ae3d_d03a_4c6b_9ad9_f36a3a6b95e1
+#ifndef _PLAYER_INFO_H_0bb8ae3d_d03a_4c6b_9ad9_f36a3a6b95e1_
+#define _PLAYER_INFO_H_0bb8ae3d_d03a_4c6b_9ad9_f36a3a6b95e1_
 
-class PlayerInfo {
-	public:
-		PlayerInfo();
-		virtual ~PlayerInfo();
+#include <vector>
+#include <memory>
+
+class PlayerInfo
+{
+    std::vector<std::unique_ptr<Ally>> m_party;
+    unsigned int gold;
+
+public:
+    PlayerInfo();
+    virtual ~PlayerInfo();
+
+    void addMemberToParty(AllyClass player);
+    void removeMemberFromParty(AllyClass player);
 };
 
 #endif
