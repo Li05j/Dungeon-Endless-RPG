@@ -13,7 +13,7 @@ UUID=$(echo "$RANDOM_UUID" | tr - _)
 # Get macro from input with underscore before capital letter
 MACRO=$(echo $1 | sed 's/[A-Z]\+/_&/g')
 # Caps the macro and append _H
-ALLCAPSMACRO="${MACRO^^}_H"
+ALLCAPSMACRO="_${MACRO^^}_H"
 # Capitalize first letter of input
 CLASS_NAME="${1^}"
 
@@ -22,7 +22,7 @@ touch $1.h
 touch $1.cpp
 
 # Print ifndef and define
-printf "#ifndef ${ALLCAPSMACRO}_${UUID}\n#define ${ALLCAPSMACRO}_${UUID}\n\n" >> $1.h
+printf "#ifndef ${ALLCAPSMACRO}_${UUID}\n#define ${ALLCAPSMACRO}_${UUID}_\n\n" >> $1.h
 # Create class, constructor and destructor.
 printf "class $CLASS_NAME {\n\tpublic:\n\t\t$CLASS_NAME();\n\t\tvirtual ~$CLASS_NAME();\n};\n\n" >> $1.h
 # Print endif
