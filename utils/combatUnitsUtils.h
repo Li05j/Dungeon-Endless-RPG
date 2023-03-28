@@ -9,6 +9,15 @@ enum AllyType
     Type_Fighter
 };
 
+enum EnemyType
+{
+    Type_MINION,
+    Type_ELITE,
+    Type_BOSS,
+    Type_BIG_BOSS,
+    Type_SPECIAL
+};
+
 enum BasicParamType
 {
     B_MaxHP,

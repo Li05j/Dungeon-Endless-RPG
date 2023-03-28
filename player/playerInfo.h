@@ -13,8 +13,8 @@ public:
     PlayerInfo();
     virtual ~PlayerInfo();
 
-    void addMemberToParty(AllyClass player);
-    void removeMemberFromParty(AllyClass player);
+    void addMemberToParty(Ally player);
+    void removeMemberFromParty(Ally player);
 };
 
 #endif

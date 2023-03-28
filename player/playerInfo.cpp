@@ -7,10 +7,10 @@ PlayerInfo::PlayerInfo() {}
 
 PlayerInfo::~PlayerInfo() {}
 
-void addMemberToParty(AllyClass player)
+void addMemberToParty(Ally player)
 {
 }
 
-void removeMemberFromParty(AllyClass player)
+void removeMemberFromParty(Ally player)
 {
 }
