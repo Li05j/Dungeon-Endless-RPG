@@ -4,6 +4,8 @@
 #include <vector>
 #include <memory>
 
+class Ally;
+
 class PlayerInfo
 {
     std::vector<std::unique_ptr<Ally>> m_party;

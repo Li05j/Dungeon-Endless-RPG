@@ -1,7 +1,9 @@
 #include "playerInfo.h"
 
 #include <iostream>
-#include "utils/funny.h"
+
+#include "back/utils/funny.h"
+#include "back/combatUnits/ally/ally.h"
 
 PlayerInfo::PlayerInfo() {}
 
