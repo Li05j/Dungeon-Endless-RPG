@@ -2,6 +2,6 @@
 
 #include <iostream>
 
-Ally::Ally() {}
+Ally::Ally() : CombatUnits() {}
 
 Ally::~Ally() {}

@@ -1,5 +1,5 @@
-#ifndef _DEBUG_UTILS_H
-#define _DEBUG_UTILS_H
+#ifndef _DEBUG_UTILS_H_
+#define _DEBUG_UTILS_H_
 
 /*
  * Bit flags for DEBUG()
@@ -25,10 +25,10 @@ extern unsigned int dbflags;
  *
  * The idea is that you put lots of lines of the form
  *
- *      DEBUG(DB_VM, "VM free pages: %u\n", free_pages);
+ *      DEBUG(DB_GENERAL, "Current EXP: %d\n", curr_exp);
  *
  * DEBUG is a varargs macro. These were added to the language in C99.
  */
-#define DEBUG(d, ...) ((dbflags & (d)) ? kprintf(__VA_ARGS__) : 0)
+#define DEBUG(d, ...) ((dbflags & (d)) ? printf(__VA_ARGS__) : 0)
 
 #endif

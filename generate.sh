@@ -22,7 +22,7 @@ touch $1.h
 touch $1.cpp
 
 # Print ifndef and define
-printf "#ifndef ${ALLCAPSMACRO}_${UUID}\n#define ${ALLCAPSMACRO}_${UUID}_\n\n" >> $1.h
+printf "#ifndef ${ALLCAPSMACRO}_${UUID}_\n#define ${ALLCAPSMACRO}_${UUID}_\n\n" >> $1.h
 # Create class, constructor and destructor.
 printf "class $CLASS_NAME {\n\tpublic:\n\t\t$CLASS_NAME();\n\t\tvirtual ~$CLASS_NAME();\n};\n\n" >> $1.h
 # Print endif
@@ -33,8 +33,8 @@ printf "#include \"$1.h\"\n\n" >> $1.cpp
 
 #########
 # Add any other includes of your liking
-printf "#include <iostream>\n" >> $1.cpp # Include iostream
-# printf "#include \"back/utils/funny.h\"\n" >> $1.cpp # Include funny.h
+# printf "#include <iostream>\n" >> $1.cpp # Include iostream
+printf "#include \"back/utils/debugUtils.h\"\n" >> $1.cpp # Include funny.h
 #########
 
 # Newline

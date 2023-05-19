@@ -1,8 +1,8 @@
 #ifndef _COMBAT_UNITS_UTILS_H_
 #define _COMBAT_UNITS_UTILS_H_
 
-#define TOTAL_BASIC_PARAMS 4;
-#define TOTAL_SKILLS 0;
+#define TOTAL_BASIC_PARAMS 4
+#define TOTAL_SKILLS 0
 
 enum AllyType
 {

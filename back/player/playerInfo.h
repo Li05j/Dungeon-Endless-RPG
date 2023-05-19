@@ -8,7 +8,7 @@ class Ally;
 
 class PlayerInfo
 {
-    std::vector<std::unique_ptr<Ally>> m_party;
+    std::vector<std::unique_ptr<Ally>> m_party; // unique ptr because only player can possess Ally.
     unsigned int gold;
 
 public:
