@@ -1,6 +1,6 @@
 TARGET_EXEC := test
 
-BUILD_DIR := ./build
+BUILD_DIR := ./zbuild
 SRC_DIRS := ./
 
 CXX=g++
