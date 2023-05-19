@@ -34,7 +34,7 @@ printf "#include \"$1.h\"\n\n" >> $1.cpp
 #########
 # Add any other includes of your liking
 # printf "#include <iostream>\n" >> $1.cpp # Include iostream
-printf "#include \"back/utils/debugUtils.h\"\n" >> $1.cpp # Include funny.h
+printf "#include \"./back/utils/debugUtils.h\"\n" >> $1.cpp # Include funny.h
 #########
 
 # Newline
