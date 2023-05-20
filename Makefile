@@ -3,7 +3,7 @@ TARGET_EXEC := test
 BUILD_DIR := ./zbuild
 
 CXX=g++
-CXXFLAGS=-std=c++23 -MMD -Werror=vla
+CXXFLAGS=-std=c++17 -MMD -Werror=vla
 
 HOME_DIR := ./
 SRC_DIRS := ./src/
@@ -21,7 +21,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 # As an example, ./build/hello.cpp.o turns into ./build/hello.cpp.d
 DEPS := $(OBJS:.o=.d)
 
-# Every folder in ./src will need to be passed to GCC so that it can find header files
+# Every folder in ./src will need to be passed to GCC so that it can find header files, while ignoring .git directory
 EXCLUDE_DIR := .git
 INC_DIRS := $(shell find $(HOME_DIR) -type d -not -path "./$(EXCLUDE_DIR)*")
 # Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
