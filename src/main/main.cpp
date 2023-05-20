@@ -7,10 +7,9 @@ int main()
 {
     std::cout << "compiled" << std::endl;
     EnemyController& c1 = EnemyController::getInstance();
-    c1.getEnemyData(1);
+    std::shared_ptr<Enemy> them = c1.getEnemyData(1);
     Ally me;
-    Enemy them;
     me.printUnitInfo();
-    them.printUnitInfo();
+    them->printUnitInfo();
     return 0;
 }

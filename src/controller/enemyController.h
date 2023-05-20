@@ -16,11 +16,12 @@ private:
 	EnemyController(EnemyController const&) = delete; // private copy constructor
 	EnemyController& operator=(EnemyController const&) = delete; // private assignment operator
 
-	std::unordered_map<int, std::shared_ptr<Enemy>> enemyData;
+	std::unordered_map<int, std::shared_ptr<Enemy>> m_enemyData;
 
 public:
 	static EnemyController& getInstance();
 
+	// load enemy on demand (lazy loading)
 	std::shared_ptr<Enemy> getEnemyData(int enemyId);
 };
 

@@ -4,6 +4,8 @@
 #define TOTAL_BASIC_PARAMS 4
 #define TOTAL_SKILLS 0
 
+#define ENEMY_DATA_LINES 5
+
 enum AllyType
 {
     Type_Fighter
@@ -20,8 +22,8 @@ enum EnemyType
 
 enum BasicParamType
 {
-    B_MaxHP,
-    B_CurrHP,
+    B_MAXHP,
+    B_CURRHP,
     B_ATK,
     B_DEF
 };
