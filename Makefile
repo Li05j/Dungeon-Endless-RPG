@@ -1,14 +1,17 @@
 TARGET_EXEC := test
 
 BUILD_DIR := ./zbuild
-SRC_DIRS := ./
 
 CXX=g++
-CXXFLAGS=-std=c++14 -MMD -Werror=vla
+CXXFLAGS=-std=c++23 -MMD -Werror=vla
+
+HOME_DIR := ./
+SRC_DIRS := ./src/
 
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. The shell will incorrectly expand these otherwise, but we want to send the * directly to the find command.
-SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+# SRCS := $(shell find $(SRC_DIRS) -name '*.cpp' -or -name '*.c' -or -name '*.s')
+SRCS := $(shell find $(SRC_DIRS) -name '*.cpp')
 
 # Prepends BUILD_DIR and appends .o to every src file
 # As an example, ./your_dir/hello.cpp turns into ./build/./your_dir/hello.cpp.o
@@ -19,7 +22,8 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 # Every folder in ./src will need to be passed to GCC so that it can find header files
-INC_DIRS := $(shell find $(SRC_DIRS) -type d)
+EXCLUDE_DIR := .git
+INC_DIRS := $(shell find $(HOME_DIR) -type d -not -path "./$(EXCLUDE_DIR)*")
 # Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 

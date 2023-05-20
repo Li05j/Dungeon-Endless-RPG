@@ -1,6 +1,6 @@
 #include "combatUnits.h"
-#include "combatUnitsUtils.h"
-#include "debugUtils.h"
+#include "./src/utils/combatUnitsUtils.h"
+#include "./src/utils/debugUtils.h"
 
 unsigned int dbflags = DB_GENERAL;
 
