@@ -45,4 +45,5 @@ void CombatUnits::printUnitInfo() {
     for (auto param : m_basicParams) {
         DEBUG(DB_GENERAL, "%d, \n", param);
     }
+    DEBUG(DB_GENERAL, "END\n");
 }

@@ -1,14 +1,16 @@
 #include "enemyController.h"
 
 #include <fstream>
-#include <limits>
-#include <string>
+// #include <limits>
 
 #include "./src/data/combatUnits/enemy/enemy.h"
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-EnemyController::EnemyController() {}
+EnemyController::EnemyController() : m_dataFileName("./src/data/combatUnits/enemy/enemy_data1.txt") {
+    populateEnemyData();
+    DEBUG(DB_GENERAL, "Populate complete.\n");
+}
 
 EnemyController::~EnemyController() {}
 
@@ -17,54 +19,93 @@ EnemyController& EnemyController::getInstance() {
     return instance;
 }
 
-std::shared_ptr<Enemy> EnemyController::getEnemyData(int enemyId) {
-    DEBUG(DB_GENERAL, "getEnemyData() called %d\n", enemyId);
-    if (m_enemyData.find(enemyId) == m_enemyData.end()) {
-        // Enemy data not loaded, load from file
-        std::ifstream file("./src/data/combatUnits/enemy/enemy_data1.txt");
-        std::string line;
-        Enemy currentEnemy;
+void EnemyController::populateEnemyData() {
+    std::ifstream file(m_dataFileName);
 
-        int skip = enemyId * (ENEMY_DATA_LINES + 1);
+    std::string line;
+    Enemy currentEnemy;
 
-        // skip lines
-        for (int i = 0; i < skip; i++) {
-            file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while (std::getline(file, line)) {
+        // DEBUG(DB_GENERAL, "populateEnemyData(): %s\n", line.c_str());
+        if (line.empty()) {
+            m_enemyData.push_back(currentEnemy);
+            continue;
         }
 
-        for (int i = 0; i < ENEMY_DATA_LINES; i++) {
-            std::getline(file, line);
-            DEBUG(DB_GENERAL, "getEnemyData(): %s.\n", line.c_str());
-
-            if (line.find("ID:") != std::string::npos) {
-                currentEnemy.setId(std::stoi(line.substr(line.find(":") + 1)));
-            }
-            else if (line.find("Name:") != std::string::npos) {
-                currentEnemy.setName(line.substr(line.find(":") + 1));
-            }
-            else if (line.find("HP:") != std::string::npos) {
-                int hp = std::stoi(line.substr(line.find(":") + 1));
-                currentEnemy.setBasicParam(B_MAXHP, hp);
-                currentEnemy.setBasicParam(B_CURRHP, hp);
-            }
-            else if (line.find("ATK:") != std::string::npos) {
-                currentEnemy.setBasicParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
-            }
-            else if (line.find("DEF:") != std::string::npos) {
-                currentEnemy.setBasicParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
-            }
+        if (line.find("ID:") != std::string::npos) {
+            currentEnemy.setId(std::stoi(line.substr(line.find(":") + 1)));
         }
-
-        if (currentEnemy.getId() == enemyId) {
-            m_enemyData[enemyId] = std::make_shared<Enemy>(currentEnemy);
+        else if (line.find("Name:") != std::string::npos) {
+            currentEnemy.setName(line.substr(line.find(":") + 2)); // + 2 to skip the space before the name
         }
-        else {
-            // should not reach;
-            DEBUG(DB_GENERAL, "Wrong enemy created! expected id: %d, actual id: %d.\n", enemyId, currentEnemy.getId());
+        else if (line.find("HP:") != std::string::npos) {
+            currentEnemy.setBasicParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
         }
-
-        file.close();
+        else if (line.find("ATK:") != std::string::npos) {
+            currentEnemy.setBasicParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
+        }
+        else if (line.find("DEF:") != std::string::npos) {
+            currentEnemy.setBasicParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+        }
     }
 
-    return m_enemyData[enemyId];
+    file.close();
 }
+
+Enemy& EnemyController::getEnemy(int id) {
+    return m_enemyData[id];
+}
+
+// lazy loading implementation
+// std::shared_ptr<Enemy> EnemyController::getEnemyData(int enemyId) {
+//     DEBUG(DB_GENERAL, "getEnemyData() called %d\n", enemyId);
+//     if (m_enemyData.find(enemyId) == m_enemyData.end()) {
+//         // Enemy data not loaded, load from file
+//         std::ifstream file("./src/data/combatUnits/enemy/enemy_data1.txt");
+//         std::string line;
+//         Enemy currentEnemy;
+
+//         int skip = enemyId * (ENEMY_DATA_LINES + 1);
+
+//         // skip lines
+//         for (int i = 0; i < skip; i++) {
+//             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+//         }
+
+//         // populate data
+//         for (int i = 0; i < ENEMY_DATA_LINES; i++) {
+//             std::getline(file, line);
+//             DEBUG(DB_GENERAL, "getEnemyData(): %s\n", line.c_str());
+
+//             if (line.find("ID:") != std::string::npos) {
+//                 currentEnemy.setId(std::stoi(line.substr(line.find(":") + 1)));
+//             }
+//             else if (line.find("Name:") != std::string::npos) {
+//                 currentEnemy.setName(line.substr(line.find(":") + 1));
+//             }
+//             else if (line.find("HP:") != std::string::npos) {
+//                 int hp = std::stoi(line.substr(line.find(":") + 1));
+//                 currentEnemy.setBasicParam(B_MAXHP, hp);
+//                 currentEnemy.setBasicParam(B_CURRHP, hp);
+//             }
+//             else if (line.find("ATK:") != std::string::npos) {
+//                 currentEnemy.setBasicParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
+//             }
+//             else if (line.find("DEF:") != std::string::npos) {
+//                 currentEnemy.setBasicParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+//             }
+//         }
+
+//         if (currentEnemy.getId() == enemyId) {
+//             m_enemyData[enemyId] = std::make_shared<Enemy>(currentEnemy);
+//         }
+//         else {
+//             // should not reach;
+//             DEBUG(DB_GENERAL, "Wrong enemy created! expected id: %d, actual id: %d.\n", enemyId, currentEnemy.getId());
+//         }
+
+//         file.close();
+//     }
+
+//     return m_enemyData[enemyId];
+// }
