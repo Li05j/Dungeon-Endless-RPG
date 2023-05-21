@@ -1,4 +1,4 @@
-#include "enemyController.h"
+#include "enemyManager.h"
 
 #include <fstream>
 // #include <limits>
@@ -7,19 +7,18 @@
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-EnemyController::EnemyController() : m_dataFileName("./src/data/combatUnits/enemy/enemy_data1.txt") {
+EnemyManager::EnemyManager() : m_dataFileName("./src/data/combatUnits/enemy/enemy_data1.txt") {
     populateEnemyData();
-    DEBUG(DB_GENERAL, "Populate complete.\n");
 }
 
-EnemyController::~EnemyController() {}
+EnemyManager::~EnemyManager() {}
 
-EnemyController& EnemyController::getInstance() {
-    static EnemyController instance;
+EnemyManager& EnemyManager::getInstance() {
+    static EnemyManager instance;
     return instance;
 }
 
-void EnemyController::populateEnemyData() {
+void EnemyManager::populateEnemyData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;
@@ -39,21 +38,29 @@ void EnemyController::populateEnemyData() {
             currentEnemy.setName(line.substr(line.find(":") + 2)); // + 2 to skip the space before the name
         }
         else if (line.find("HP:") != std::string::npos) {
-            currentEnemy.setBasicParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("ATK:") != std::string::npos) {
-            currentEnemy.setBasicParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("DEF:") != std::string::npos) {
-            currentEnemy.setBasicParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
         }
     }
 
     file.close();
+
+    if (m_enemyData.empty()) {
+        DEBUG(DB_GENERAL, "ERROR -- populateEnemyData(): No enemy is popullated.\n");
+    }
 }
 
-Enemy& EnemyController::getEnemy(int id) {
-    return m_enemyData[id];
+Enemy& EnemyManager::getEnemy(int enemyId) {
+    if (enemyId >= 0 && m_enemyData.size() > enemyId) {
+        return m_enemyData.at(enemyId);
+    }
+    DEBUG(DB_GENERAL, "ERROR -- getEnemy(): enemyId OutOfRange. enemyId = %d.\n", enemyId);
+    return m_enemyData.at(0);
 }
 
 // lazy loading implementation

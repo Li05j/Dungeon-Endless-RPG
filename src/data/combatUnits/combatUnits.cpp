@@ -2,8 +2,6 @@
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-unsigned int dbflags = DB_GENERAL;
-
 CombatUnits::CombatUnits() : m_id(-1), m_name("fuck!") {
     m_basicParams.reserve(TOTAL_BASIC_PARAMS);
     for (int i = 0; i < TOTAL_BASIC_PARAMS; i++) {
@@ -21,7 +19,15 @@ std::string CombatUnits::getName() {
     return m_name;
 }
 
-std::vector<int>& CombatUnits::getBasicParams() {
+int CombatUnits::getOneBParam(int bParamType) {
+    if (m_basicParams.size() > bParamType) {
+        return m_basicParams[bParamType];
+    }
+    DEBUG(DB_GENERAL, "Error -- getOneBParam(): bParamType OutOfRange. bParamType = %d.\n", bParamType);
+    return -1;
+}
+
+std::vector<int>& CombatUnits::getAllBParams() {
     return m_basicParams;
 }
 
@@ -33,15 +39,15 @@ void CombatUnits::setName(std::string name) {
     m_name = name;
 }
 
-void CombatUnits::setBasicParam(int type, int param) {
-    m_basicParams.at(type) = param;
+void CombatUnits::setBParam(int bParamType, int param) {
+    m_basicParams.at(bParamType) = param;
 }
 
 void CombatUnits::printUnitInfo() {
     DEBUG(DB_GENERAL, "Unit info...\n");
     DEBUG(DB_GENERAL, "id: %d\n", m_id);
     DEBUG(DB_GENERAL, "name: %s\n", m_name.c_str());
-    DEBUG(DB_GENERAL, "basic params: \n");
+    DEBUG(DB_GENERAL, "basic params... \n");
     for (auto param : m_basicParams) {
         DEBUG(DB_GENERAL, "%d, \n", param);
     }

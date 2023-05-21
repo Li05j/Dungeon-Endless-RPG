@@ -1,0 +1,12 @@
+ID: 0
+Name: Main Char 1
+HP: 21
+ATK: 6
+DEF: 6
+
+ID: 1
+Name: Main Char 2
+HP: 17
+ATK: 3
+DEF: 9
+

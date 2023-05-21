@@ -5,6 +5,7 @@
 #define TOTAL_SKILLS 0
 
 #define ENEMY_DATA_LINES 5
+#define ALLY_DATA_LINES 5
 
 enum AllyType
 {

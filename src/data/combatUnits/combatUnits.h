@@ -5,23 +5,23 @@
 #include <vector>
 
 class CombatUnits {
-private:
+protected:
 	int m_id;
 	std::string m_name;
 	std::vector<int> m_basicParams;
 
 public:
-	// since we will be doing lazy loading, we will not init right now, but instead read from file.
 	CombatUnits();
 	virtual ~CombatUnits() = 0;
 
 	int getId();
 	std::string getName();
-	std::vector<int>& getBasicParams();
+	int getOneBParam(int bParamType);
+	std::vector<int>& getAllBParams();
 
 	void setId(int id);
 	void setName(std::string name);
-	void setBasicParam(int type, int param);
+	void setBParam(int bParamType, int param);
 
 	virtual void printUnitInfo();
 };

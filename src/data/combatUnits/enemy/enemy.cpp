@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-#include "./utils/debugUtils.h"
+#include "./src/utils/debugUtils.h"
 
 Enemy::Enemy() : CombatUnits() {}
 
