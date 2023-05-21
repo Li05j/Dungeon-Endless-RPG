@@ -23,7 +23,8 @@ public:
 	void setName(std::string name);
 	void setBParam(int bParamType, int param);
 
-	virtual void printUnitInfo();
+	// debug use
+	virtual void debugPrintUnitInfo();
 };
 
 #endif

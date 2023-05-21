@@ -20,8 +20,8 @@ int main()
     Enemy& them = c1.getEnemy(2);
     p1.addMemberToParty(0);
     // Ally me;
-    p1.getAlly(1).printUnitInfo();
-    them.printUnitInfo();
+    p1.getAlly(1).debugPrintUnitInfo();
+    them.debugPrintUnitInfo();
     s1.getSkill(2).debugPrintSkill();
     return 0;
 }

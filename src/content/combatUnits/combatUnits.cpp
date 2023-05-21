@@ -43,7 +43,7 @@ void CombatUnits::setBParam(int bParamType, int param) {
     m_basicParams.at(bParamType) = param;
 }
 
-void CombatUnits::printUnitInfo() {
+void CombatUnits::debugPrintUnitInfo() {
     DEBUG(DB_GENERAL, "Unit info...\n");
     DEBUG(DB_GENERAL, "id: %d\n", m_id);
     DEBUG(DB_GENERAL, "name: %s\n", m_name.c_str());

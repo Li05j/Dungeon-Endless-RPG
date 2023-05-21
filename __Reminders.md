@@ -9,6 +9,5 @@ far future:
 - probably just catch in main is better, and just throw when error.
 
 next:
-- skill manager
 - battle logic and battle demo (including dummy damange formula)
 - idea: skill have formula type, battle manager will prob store array of formulas (maybe need a formula class?)

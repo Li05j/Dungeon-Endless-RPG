@@ -14,7 +14,8 @@ public:
 	void addToParty();
 	void kickFromParty();
 
-	virtual void printUnitInfo() override;
+	// debug use
+	virtual void debugPrintUnitInfo() override;
 };
 
 #endif

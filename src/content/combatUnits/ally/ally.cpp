@@ -14,7 +14,7 @@ void Ally::kickFromParty() {
     m_isPartyMember = false;
 }
 
-void Ally::printUnitInfo() {
+void Ally::debugPrintUnitInfo() {
     DEBUG(DB_GENERAL, "Unit info...\n");
     DEBUG(DB_GENERAL, "id: %d\n", m_id);
     DEBUG(DB_GENERAL, "name: %s\n", m_name.c_str());
