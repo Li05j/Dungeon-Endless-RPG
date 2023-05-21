@@ -24,7 +24,7 @@ touch $1.cpp
 # Print ifndef and define
 printf "#ifndef ${ALLCAPSMACRO}_${UUID}_\n#define ${ALLCAPSMACRO}_${UUID}_\n\n" >> $1.h
 # Create class, constructor and destructor.
-printf "class $CLASS_NAME {\n\tpublic:\n\t\t$CLASS_NAME();\n\t\tvirtual ~$CLASS_NAME();\n};\n\n" >> $1.h
+printf "class $CLASS_NAME {\npublic:\n\t$CLASS_NAME();\n\t\tvirtual ~$CLASS_NAME();\n};\n\n" >> $1.h
 # Print endif
 printf "#endif\n" >> $1.h
 
