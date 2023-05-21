@@ -3,11 +3,11 @@
 #include <fstream>
 // #include <limits>
 
-#include "./src/data/combatUnits/enemy/enemy.h"
+#include "./src/content/combatUnits/enemy/enemy.h"
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-EnemyManager::EnemyManager() : m_dataFileName("./src/data/combatUnits/enemy/enemy_data1.txt") {
+EnemyManager::EnemyManager() : m_dataFileName("./src/data/enemy_data1.txt") {
     populateEnemyData();
 }
 
@@ -68,7 +68,7 @@ Enemy& EnemyManager::getEnemy(int enemyId) {
 //     DEBUG(DB_GENERAL, "getEnemyData() called %d\n", enemyId);
 //     if (m_enemyData.find(enemyId) == m_enemyData.end()) {
 //         // Enemy data not loaded, load from file
-//         std::ifstream file("./src/data/combatUnits/enemy/enemy_data1.txt");
+//         std::ifstream file("./src/content/combatUnits/enemy/enemy_data1.txt");
 //         std::string line;
 //         Enemy currentEnemy;
 

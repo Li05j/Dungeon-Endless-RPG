@@ -1,6 +1,6 @@
 #include <iostream>
-#include "./src/data/combatUnits/ally/ally.h"
-#include "./src/data/combatUnits/enemy/enemy.h"
+#include "./src/content/combatUnits/ally/ally.h"
+#include "./src/content/combatUnits/enemy/enemy.h"
 #include "./src/manager/enemyManager.h"
 #include "./src/manager/playerInfoManager.h"
 

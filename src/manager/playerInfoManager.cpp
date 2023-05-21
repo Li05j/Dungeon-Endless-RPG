@@ -2,11 +2,11 @@
 
 #include <fstream>
 
-#include "./src/data/combatUnits/ally/ally.h"
+#include "./src/content/combatUnits/ally/ally.h"
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-PlayerInfoManager::PlayerInfoManager() : m_dataFileName("./src/data/combatUnits/ally/ally_data.txt") {
+PlayerInfoManager::PlayerInfoManager() : m_dataFileName("./src/data/ally_data.txt") {
     populateAllyData();
 }
 
