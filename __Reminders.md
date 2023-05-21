@@ -1,7 +1,7 @@
 near future:
 - make combatunits with id 0 a dummy default character
-- how to split header and source in a more structured way.
-- getting enemy is returning a reference because we need to create a battle enemy class with dynamic stats for battle; the battle enemy class will likely take in a enemy reference in its constructor; enemy class is NOT the actual individual enemy data.
+- subclass for skill, enemy and ally, see next point for reason
+- i.e. getting enemy is returning a reference because we need to create a battle enemy class with dynamic stats for battle; the battle enemy class will likely take in a enemy reference in its constructor; enemy class is NOT the actual individual enemy data.
 
 far future:
 - switch to json/xml for enemy data.

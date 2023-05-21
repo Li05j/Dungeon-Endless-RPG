@@ -38,11 +38,12 @@ void PlayerInfoManager::populateAllyData() {
             continue;
         }
 
+        // + 2 for strings to skip the space after the colon
         if (line.find("ID:") != std::string::npos) {
             currentAlly.setId(std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("Name:") != std::string::npos) {
-            currentAlly.setName(line.substr(line.find(":") + 2)); // + 2 to skip the space before the name
+            currentAlly.setName(line.substr(line.find(":") + 2));
         }
         else if (line.find("HP:") != std::string::npos) {
             currentAlly.setBParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));

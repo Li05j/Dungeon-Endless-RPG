@@ -31,11 +31,12 @@ void EnemyManager::populateEnemyData() {
             continue;
         }
 
+        // + 2 for strings to skip the space after the colon
         if (line.find("ID:") != std::string::npos) {
             currentEnemy.setId(std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("Name:") != std::string::npos) {
-            currentEnemy.setName(line.substr(line.find(":") + 2)); // + 2 to skip the space before the name
+            currentEnemy.setName(line.substr(line.find(":") + 2));
         }
         else if (line.find("HP:") != std::string::npos) {
             currentEnemy.setBParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));

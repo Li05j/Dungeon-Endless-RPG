@@ -2,7 +2,7 @@
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-CombatUnits::CombatUnits() : m_id(-1), m_name("fuck!") {
+CombatUnits::CombatUnits() : m_id(DUMMY_DEFAULT), m_name("combat unit fuck!") {
     m_basicParams.reserve(TOTAL_BASIC_PARAMS);
     for (int i = 0; i < TOTAL_BASIC_PARAMS; i++) {
         m_basicParams.push_back(-i);

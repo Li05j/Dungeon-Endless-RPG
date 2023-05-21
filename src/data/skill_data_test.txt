@@ -1,0 +1,15 @@
+ID: 0
+Name: Normal Attack
+Power: 50
+Target: Both
+
+ID: 1
+Name: Defend
+Power: 0
+Target: Self
+
+ID: 2
+Name: Run
+Power: 0
+Target: Ally
+
