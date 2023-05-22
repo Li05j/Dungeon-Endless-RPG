@@ -2,6 +2,7 @@ near future:
 - make combatunits with id 0 a dummy default character
 - subclass for skill, enemy and ally, see next point for reason
 - i.e. getting enemy is returning a reference because we need to create a battle enemy class with dynamic stats for battle; the battle enemy class will likely take in a enemy reference in its constructor; enemy class is NOT the actual individual enemy data.
+- stat debuffs need to be created on the fly (dynamic because debuff strength)
 
 far future:
 - switch to json/xml for enemy data.
@@ -9,5 +10,6 @@ far future:
 - probably just catch in main is better, and just throw when error.
 
 next:
+- reserve space for vectors in managers (need to get max ally, enemy and skill count)
 - battle logic and battle demo (including dummy damange formula)
 - idea: skill have formula type, battle manager will prob store array of formulas (maybe need a formula class?)
