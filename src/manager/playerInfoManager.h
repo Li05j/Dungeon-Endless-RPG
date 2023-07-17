@@ -3,31 +3,33 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 class Ally;
+class AllyManager;
 
 class PlayerInfoManager
 {
 private:
-    PlayerInfoManager();
+    PlayerInfoManager(AllyManager& allyM);
     virtual ~PlayerInfoManager();
 
     PlayerInfoManager(PlayerInfoManager const&) = delete; // private copy constructor
     PlayerInfoManager& operator=(PlayerInfoManager const&) = delete; // private assignment operator
 
-    std::vector<Ally> m_allyData;
-    std::string m_dataFileName;
+    AllyManager& m_allyM;
 
+    std::vector<std::shared_ptr<Ally>> m_party;
     unsigned int gold;
 
-    void populateAllyData();
-
 public:
-    static PlayerInfoManager& getInstance();
+    static PlayerInfoManager& getInstance(AllyManager& allyM);
 
-    Ally& getAlly(int allyId);
     void addMemberToParty(int allyId);
     void removeMemberFromParty(int allyId);
+
+    // debug
+    void debugPrintPartyInfo();
 };
 
 #endif

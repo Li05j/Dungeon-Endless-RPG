@@ -5,14 +5,10 @@
 
 class Ally : public CombatUnits {
 private:
-	bool m_isPartyMember;
 
 public:
 	Ally();
 	virtual ~Ally();
-
-	void addToParty();
-	void kickFromParty();
 
 	// debug use
 	virtual void debugPrintUnitInfo() override;
