@@ -7,6 +7,9 @@ class Enemy : public CombatUnits {
 public:
 	Enemy();
 	virtual ~Enemy();
+
+	// debug use
+	virtual void debugPrintUnitInfo() override;
 };
 
 #endif

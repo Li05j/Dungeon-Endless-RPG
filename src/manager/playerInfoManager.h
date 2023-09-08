@@ -19,7 +19,8 @@ private:
 
     AllyManager& m_allyM;
 
-    std::vector<std::shared_ptr<Ally>> m_party;
+    std::vector<int> m_party; // 0 means not in party, 1 means in party
+    int m_current_party_size;
     unsigned int gold;
 
 public:
@@ -27,6 +28,7 @@ public:
 
     void addMemberToParty(int allyId);
     void removeMemberFromParty(int allyId);
+    int getCurrentPartySize();
 
     // debug
     void debugPrintPartyInfo();

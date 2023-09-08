@@ -21,11 +21,13 @@ int main()
 
     PlayerInfoManager& p1 = PlayerInfoManager::getInstance(a1);
 
+    // a1.debugPrintManagerInfo();
+
     Enemy& them = c1.getEnemy(2);
 
-    std::cout << a1.getTotalPlayableAllies() << std::endl;
+    // std::cout << a1.getTotalPlayableAllies() << std::endl;
     p1.addMemberToParty(0);
-    p1.addMemberToParty(1);
+    // p1.addMemberToParty(1);
     p1.debugPrintPartyInfo();
     // them.debugPrintUnitInfo();
     // s1.getSkill(2).debugPrintSkill();

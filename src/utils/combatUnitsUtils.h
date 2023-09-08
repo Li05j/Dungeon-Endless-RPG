@@ -4,6 +4,9 @@
 #define TOTAL_BASIC_PARAMS 3
 #define TOTAL_SKILLS 0
 
+#define TOTAL_ALLY 3
+#define TOTAL_ENEMY 3
+
 #define ALLY_DATA_LINES 5
 #define ENEMY_DATA_LINES 5
 #define SKILL_DATA_LINES 4

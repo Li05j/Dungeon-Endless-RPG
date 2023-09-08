@@ -4,13 +4,13 @@ HP: -1
 ATK: -1
 DEF: -1
 
-ID: 0
+ID: 1
 Name: Slime
 HP: 24
 ATK: 5
 DEF: 4
 
-ID: 1
+ID: 2
 Name: Bat
 HP: 13
 ATK: 7

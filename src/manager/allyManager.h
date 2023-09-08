@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <memory>
 
 class Ally;
 
@@ -15,7 +14,7 @@ private:
 	AllyManager(AllyManager const&) = delete; // private copy constructor
 	AllyManager& operator=(AllyManager const&) = delete; // private assignment operator
 
-	std::vector<std::shared_ptr<Ally>> m_allyData;
+	std::vector<Ally> m_allyData;
 	std::string m_dataFileName;
 
 	void populateAllyData();
@@ -23,8 +22,11 @@ private:
 public:
 	static AllyManager& getInstance();
 
-	int getTotalPlayableAllies();
-	std::shared_ptr<Ally> getAlly(int allyId);
+	// int getTotalPlayableAllies();
+	Ally getAlly(int allyId);
+
+	// debug use
+	virtual void debugPrintManagerInfo();
 };
 
 #endif
