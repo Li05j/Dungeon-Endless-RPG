@@ -47,9 +47,9 @@ void SkillManager::populateSkillData() {
         else if (line.find("Power:") != std::string::npos) {
             currentSkill.setPow(std::stoi(line.substr(line.find(":") + 1)));
         }
-        else if (line.find("Target:") != std::string::npos) {
-            currentSkill.setTarget(line.substr(line.find(":") + 2));
-        }
+        // else if (line.find("Target:") != std::string::npos) {
+        //     currentSkill.setTarget(line.substr(line.find(":") + 2));
+        // }
     }
 
     file.close();

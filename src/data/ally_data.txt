@@ -1,18 +1,36 @@
 ID: 0
 Name: dummy
 HP: -1
+MP: -1
 ATK: -1
+MAT: -1
 DEF: -1
+MDF: -1
+SPD: -1
+REC: -1
+Skills: 0,0,0
 
 ID: 1
 Name: Main Char 1
 HP: 101
+MP: 47
 ATK: 92
+MAT: 61
 DEF: 86
+MDF: 46
+SPD: 87
+REC: 60
+skills: 0,1,1
 
 ID: 2
 Name: Main Char 2
 HP: 63
+MP: 82
 ATK: 49
 DEF: 52
+MAT: 113
+MDF: 94
+SPD: 63
+REC: 64
+skills: 0,1,1
 

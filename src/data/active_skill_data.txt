@@ -2,12 +2,9 @@ ID: 0
 Name: dummy
 Type: Phys
 Power: 50
-Target: Both
 Range: 1
 HP_cost_flat: 0
-HP_cost%: 0
 MP_cost_flat: 0
-MP_cost%: 0
 Buff: -1
 Debuff: -1
 CD: 0
@@ -16,12 +13,9 @@ ID: 1
 Name: Normal Attack
 Type: Phys
 Power: 50
-Target: Both
-Range: 1
+Range: Front
 HP_cost_flat: 0
-HP_cost%: 0
 MP_cost_flat: 0
-MP_cost%: 0
 Buff: -1
 Debuff: -1
 CD: 0
@@ -30,12 +24,9 @@ ID: 2
 Name: Defend
 Type: Phys
 Power: 0
-Target: Self
-Range: -1
+Range: Self
 HP_cost_flat: 0
-HP_cost%: 0
 MP_cost_flat: 0
-MP_cost%: 0
 Buff: -1
 Debuff: -1
 CD: 1
@@ -44,12 +35,9 @@ ID: 3
 Name: Run
 Type: Phys
 Power: 0
-Target: Ally
-Range: All
+Range: N/A
 HP_cost_flat: 0
-HP_cost%: 0
 MP_cost_flat: 0
-MP_cost%: 0
 Buff: -1
 Debuff: -1
 CD: 0

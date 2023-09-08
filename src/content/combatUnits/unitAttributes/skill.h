@@ -10,7 +10,7 @@ private:
 	std::string m_name;
 	// int m_type;
 	int m_pow;
-	int m_target; // TargetType, when SELF, range is ignored
+	// int m_target; // TargetType, when SELF, range is ignored
 	// int m_range; // special values: SKILL_RANGE_NOT_APPLICABLE and SKILL_RANGE_ALL
 	// int m_fHpCost;
 	// int m_pHpCost;
@@ -27,7 +27,7 @@ public:
 	void setName(std::string name);
 
 	void setPow(int pow);
-	void setTarget(std::string target);
+	// void setTarget(std::string target);
 
 	// debug use
 	void debugPrintSkill();
