@@ -28,6 +28,8 @@ public:
 
     void addMemberToParty(int allyId);
     void removeMemberFromParty(int allyId);
+
+    const std::vector<int>& getPlayerParty() const;
     int getCurrentPartySize();
 
     // debug

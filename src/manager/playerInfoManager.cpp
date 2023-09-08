@@ -49,6 +49,10 @@ void PlayerInfoManager::removeMemberFromParty(int allyId) {
     DEBUG(DB_GENERAL, "ERROR -- removeMemberFromParty(): allyId OutOfRange. allyId = %d.\n", allyId);
 }
 
+const std::vector<int>& PlayerInfoManager::getPlayerParty() const {
+    return m_party;
+}
+
 int PlayerInfoManager::getCurrentPartySize() {
     return m_current_party_size;
 }
