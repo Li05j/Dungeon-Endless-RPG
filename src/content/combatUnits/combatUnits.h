@@ -4,10 +4,12 @@
 #include <string>
 #include <vector>
 
+#include "./src/utils/combatUnitsUtils.h"
+
 class CombatUnits {
 protected:
-	int m_id;
-	std::string m_name;
+	int m_id = DUMMY_DEFAULT;
+	std::string m_name = "combat unit default name fuck! something is probably wrong";
 	std::vector<int> m_basicParams;
 
 public:
