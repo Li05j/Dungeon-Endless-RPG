@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 
+#include "./src/interface/observerIface.h"
+#include "./src/interface/subjectIface.h"
+
 class AllyManager;
 class EnemyManager;
 class PlayerInfoManager;
@@ -12,7 +15,7 @@ class SkillManager;
 class Ally;
 class Enemy;
 
-class BattleManager {
+class BattleManager : public SubjectIface {
 private:
 	BattleManager(AllyManager& allyM, EnemyManager& enemyM, PlayerInfoManager& playerM, SkillManager& skillM);
 	virtual ~BattleManager();
@@ -28,6 +31,8 @@ private:
 	std::vector<Ally> m_allyBattle;
 	std::vector<Enemy> m_enemyBattle;
 
+	ObserverIface& m_observer;
+
 	void populateAllyBattle();
 	void populateEnemyBattle();
 public:
@@ -35,6 +40,10 @@ public:
 
 	const std::vector<Ally>& getAllyBattle() const;
 	const std::vector<Enemy>& getEnemyBattle() const;
+
+	virtual void addObserver(ObserverIface& observer) override;
+	virtual void removeObserver(ObserverIface& observer) override;
+	virtual void notifyObservers() override;
 
 	void prepareBattle();
 	void endBattle();
