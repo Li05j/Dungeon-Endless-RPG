@@ -4,9 +4,10 @@
 #include "./src/interface/observerIface.h"
 
 class BattleManager;
+class CombatUnits;
 
 class BattleView : ObserverIface {
-	BattleView();
+	BattleView(BattleManager& battleM);
 	virtual ~BattleView();
 
 	BattleView(BattleView const&) = delete; // private copy constructor
@@ -14,9 +15,13 @@ class BattleView : ObserverIface {
 
 	BattleManager& m_battleM;
 
-public:
-	static BattleView& getInstance();
+	void displayCombatUnitBasicStats(CombatUnits& unit);
+	void displayCombatUnitDetailedStats();
 
+public:
+	static BattleView& getInstance(BattleManager& battleM);
+
+	void init();
 	void show();
 	virtual void update() override;
 };

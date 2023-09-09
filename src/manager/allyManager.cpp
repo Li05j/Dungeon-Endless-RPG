@@ -24,7 +24,7 @@ void AllyManager::populateAllyData() {
     Ally currentAlly;
 
     while (std::getline(file, line)) {
-        DEBUG(DB_GENERAL, "populateAllyData(): %s\n", line.c_str());
+        // DEBUG(DB_GENERAL, "Ally manager populateAllyData(): %s\n", line.c_str());
         if (line.empty()) {
             m_allyData.push_back(currentAlly);
             continue;
@@ -38,13 +38,16 @@ void AllyManager::populateAllyData() {
             currentAlly.setName(line.substr(line.find(":") + 2));
         }
         else if (line.find("HP:") != std::string::npos) {
-            currentAlly.setBParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
+            currentAlly.setBPGrowth(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("ATK:") != std::string::npos) {
-            currentAlly.setBParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
+            currentAlly.setBPGrowth(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("DEF:") != std::string::npos) {
-            currentAlly.setBParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+            currentAlly.setBPGrowth(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+        }
+        else if (line.find("SPD:") != std::string::npos) {
+            currentAlly.setBPGrowth(B_SPD, std::stoi(line.substr(line.find(":") + 1)));
         }
     }
 
@@ -60,7 +63,7 @@ void AllyManager::populateAllyData() {
 // }
 
 Ally AllyManager::getAlly(int allyId) {
-    DEBUG(DB_GENERAL, "getAlly(), ally id is? %d...\n", allyId);
+    // DEBUG(DB_GENERAL, "getAlly(), ally id is? %d...\n", allyId);
     if (allyId >= 0 && TOTAL_ALLY > allyId) {
         return m_allyData.at(allyId);
     }

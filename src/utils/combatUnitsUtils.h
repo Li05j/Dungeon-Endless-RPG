@@ -1,7 +1,7 @@
 #ifndef _COMBAT_UNITS_UTILS_H_
 #define _COMBAT_UNITS_UTILS_H_
 
-#define TOTAL_BASIC_PARAMS 3
+#define TOTAL_BASIC_PARAMS 5
 #define TOTAL_SKILLS 0
 
 #define TOTAL_ALLY 3
@@ -31,8 +31,10 @@ enum EnemyType
 enum BasicParamType
 {
     B_MAXHP,
+    B_CURRHP,
     B_ATK,
-    B_DEF
+    B_DEF,
+    B_SPD,
 };
 
 enum SkillType

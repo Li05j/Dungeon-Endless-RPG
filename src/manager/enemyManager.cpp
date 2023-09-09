@@ -39,13 +39,16 @@ void EnemyManager::populateEnemyData() {
             currentEnemy.setName(line.substr(line.find(":") + 2));
         }
         else if (line.find("HP:") != std::string::npos) {
-            currentEnemy.setBParam(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBPGrowth(B_MAXHP, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("ATK:") != std::string::npos) {
-            currentEnemy.setBParam(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBPGrowth(B_ATK, std::stoi(line.substr(line.find(":") + 1)));
         }
         else if (line.find("DEF:") != std::string::npos) {
-            currentEnemy.setBParam(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+            currentEnemy.setBPGrowth(B_DEF, std::stoi(line.substr(line.find(":") + 1)));
+        }
+        else if (line.find("SPD:") != std::string::npos) {
+            currentEnemy.setBPGrowth(B_SPD, std::stoi(line.substr(line.find(":") + 1)));
         }
     }
 

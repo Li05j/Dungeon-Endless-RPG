@@ -10,7 +10,8 @@ class CombatUnits {
 protected:
 	int m_id = DUMMY_DEFAULT;
 	std::string m_name = "combat unit default name fuck! something is probably wrong";
-	std::vector<int> m_basicParams;
+	std::vector<int> m_bp_growth;
+	std::vector<int> m_basic_params;
 
 public:
 	CombatUnits();
@@ -19,10 +20,11 @@ public:
 	int getId();
 	std::string getName();
 	int getOneBParam(int bParamType);
-	std::vector<int>& getAllBParams();
+	const std::vector<int>& getAllBParams() const;
 
 	void setId(int id);
 	void setName(std::string name);
+	void setBPGrowth(int bParamType, int param);
 	void setBParam(int bParamType, int param);
 
 	// debug use

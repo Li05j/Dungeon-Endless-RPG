@@ -31,8 +31,8 @@ Name: Fairy
 HP: 49
 MP: 101
 ATK: 16
-MAT: 42
-DEF: 85
+MAT: 85
+DEF: 42
 MDF: 51
 SPD: 114
 REC: 67

@@ -7,8 +7,8 @@ class SubjectIface {
 private:
 
 public:
-	virtual void addObserver(ObserverIface& observer) = 0;
-	virtual void removeObserver(ObserverIface& observer) = 0;
+	virtual void addObserver(ObserverIface* observer) = 0;
+	virtual void removeObserver(ObserverIface* observer) = 0;
 	virtual void notifyObservers() = 0;
 };
 

@@ -31,7 +31,7 @@ private:
 	std::vector<Ally> m_allyBattle;
 	std::vector<Enemy> m_enemyBattle;
 
-	ObserverIface& m_observer;
+	ObserverIface* m_observer;
 
 	void populateAllyBattle();
 	void populateEnemyBattle();
@@ -41,8 +41,8 @@ public:
 	const std::vector<Ally>& getAllyBattle() const;
 	const std::vector<Enemy>& getEnemyBattle() const;
 
-	virtual void addObserver(ObserverIface& observer) override;
-	virtual void removeObserver(ObserverIface& observer) override;
+	virtual void addObserver(ObserverIface* observer) override;
+	virtual void removeObserver(ObserverIface* observer) override;
 	virtual void notifyObservers() override;
 
 	void prepareBattle();

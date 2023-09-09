@@ -61,7 +61,7 @@ void BattleManager::populateEnemyBattle() {
 
     // Generate a random number
     int random_enemy = distribution(gen);
-    DEBUG(DB_GENERAL, "populateEnemyBattle... random enemy id is %d\n", random_enemy);
+    // DEBUG(DB_GENERAL, "populateEnemyBattle... random enemy id is %d\n", random_enemy);
 
     m_enemyBattle.push_back(m_enemyM.getEnemy(random_enemy));
 }
@@ -74,16 +74,16 @@ const std::vector<Enemy>& BattleManager::getEnemyBattle() const {
     return m_enemyBattle;
 }
 
-void BattleManager::addObserver(ObserverIface& observer) {
+void BattleManager::addObserver(ObserverIface* observer) {
     m_observer = observer;
 }
 
-void BattleManager::removeObserver(ObserverIface& observer) {
+void BattleManager::removeObserver(ObserverIface* observer) {
     // shouldn't need this ever
 }
 
 void BattleManager::notifyObservers() {
-    m_observer.update();
+    m_observer->update();
 }
 
 void BattleManager::prepareBattle() {

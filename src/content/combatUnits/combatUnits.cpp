@@ -1,12 +1,7 @@
 #include "combatUnits.h"
 #include "./src/utils/debugUtils.h"
 
-CombatUnits::CombatUnits() {
-    m_basicParams.reserve(TOTAL_BASIC_PARAMS);
-    for (int i = 0; i < TOTAL_BASIC_PARAMS; i++) {
-        m_basicParams.push_back(-i);
-    }
-}
+CombatUnits::CombatUnits() : m_bp_growth(TOTAL_BASIC_PARAMS, -1), m_basic_params(TOTAL_BASIC_PARAMS, -1) {}
 
 CombatUnits::~CombatUnits() {}
 
@@ -19,15 +14,15 @@ std::string CombatUnits::getName() {
 }
 
 int CombatUnits::getOneBParam(int bParamType) {
-    if (m_basicParams.size() > bParamType) {
-        return m_basicParams[bParamType];
+    if (TOTAL_BASIC_PARAMS > bParamType) {
+        return m_basic_params[bParamType];
     }
     DEBUG(DB_GENERAL, "Error -- getOneBParam(): bParamType OutOfRange. bParamType = %d.\n", bParamType);
     return -1;
 }
 
-std::vector<int>& CombatUnits::getAllBParams() {
-    return m_basicParams;
+const std::vector<int>& CombatUnits::getAllBParams() const {
+    return m_basic_params;
 }
 
 void CombatUnits::setId(int id) {
@@ -38,8 +33,17 @@ void CombatUnits::setName(std::string name) {
     m_name = name;
 }
 
+void CombatUnits::setBPGrowth(int bParamType, int param) {
+    m_bp_growth.at(bParamType) = param;
+    // initialize params
+    if (bParamType == B_MAXHP) {
+        setBParam(B_CURRHP, param);
+    }
+    setBParam(bParamType, param);
+}
+
 void CombatUnits::setBParam(int bParamType, int param) {
-    m_basicParams.at(bParamType) = param;
+    m_basic_params.at(bParamType) = param;
 }
 
 void CombatUnits::debugPrintUnitInfo() {
@@ -47,7 +51,7 @@ void CombatUnits::debugPrintUnitInfo() {
     DEBUG(DB_GENERAL, "id: %d\n", m_id);
     DEBUG(DB_GENERAL, "name: %s\n", m_name.c_str());
     DEBUG(DB_GENERAL, "basic params... \n");
-    for (auto param : m_basicParams) {
+    for (auto param : m_basic_params) {
         DEBUG(DB_GENERAL, "%d, \n", param);
     }
     DEBUG(DB_GENERAL, "END\n");
