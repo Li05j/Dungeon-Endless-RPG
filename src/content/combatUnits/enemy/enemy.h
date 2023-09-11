@@ -5,7 +5,7 @@
 
 class Enemy : public CombatUnits {
 public:
-	Enemy();
+	Enemy(UnitType type);
 	virtual ~Enemy();
 
 	// debug use

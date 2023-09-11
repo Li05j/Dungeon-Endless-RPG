@@ -25,6 +25,7 @@ void BattleView::displayCombatUnitBasicStats(CombatUnits& unit) {
     int currhp = unit.getOneBParam(B_CURRHP);
 
     std::cout << name << " " << currhp << "/" << maxhp;
+    std::cout << std::endl << std::endl;
 }
 
 void BattleView::displayCombatUnitDetailedStats() {
@@ -33,25 +34,25 @@ void BattleView::displayCombatUnitDetailedStats() {
 
 void BattleView::init() {
     m_battleM.prepareBattle();
-    show();
+    // show();
 }
 
 void BattleView::show() {
+    const int turn = m_battleM.getTurn();
     const std::vector<Ally>& allyBattle = m_battleM.getAllyBattle();
     const std::vector<Enemy>& enemyBattle = m_battleM.getEnemyBattle();
 
     // TODO: get data for the ally/enemy and somehow print it on the screen.
 
-    for (auto enemy : enemyBattle) {
+    std::cout << "Current Turn: " << turn << std::endl << std::endl;
+
+    for (auto enemy : enemyBattle) {  // TODO: need to change this to traditional for loop to avoid creating copies of enemy just to print stuff
         displayCombatUnitBasicStats(enemy);
     }
 
-    std::cout << std::endl << std::endl;
-
-    for (auto ally : allyBattle) {
+    for (auto ally : allyBattle) { // TODO: same as above
         displayCombatUnitBasicStats(ally);
     }
-    std::cout << std::endl << std::endl;
 }
 
 void BattleView::update() {

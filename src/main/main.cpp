@@ -38,35 +38,6 @@ int main()
     // them.debugPrintUnitInfo();
     // s1.getSkill(2).debugPrintSkill();
 
-    b1.prepareBattle();
-    auto allyBattle = b1.getAllyBattle();
-    auto enemyBattle = b1.getEnemyBattle();
-
-    std::cout << "Battle Starts!" << std::endl;
-    std::cout << "Your party..." << std::endl;
-    for (auto ally : allyBattle) {
-        ally.debugPrintUnitInfo();
-    }
-    std::cout << "Enemey's party..." << std::endl;
-    for (auto enemy : enemyBattle) {
-        enemy.debugPrintUnitInfo();
-    }
-    std::cout << "Battle Ends!" << std::endl;
-    b1.endBattle();
-
-
-    allyBattle = b1.getAllyBattle();
-    enemyBattle = b1.getEnemyBattle();
-    std::cout << "Checking if battle ended or not..." << std::endl;
-    for (auto ally : allyBattle) {
-        ally.debugPrintUnitInfo();
-    }
-    std::cout << "Enemey's party..." << std::endl;
-    for (auto enemy : enemyBattle) {
-        enemy.debugPrintUnitInfo();
-    }
-    std::cout << "Battle ended succesfully!" << std::endl;
-
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;

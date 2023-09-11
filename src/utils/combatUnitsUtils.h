@@ -18,6 +18,13 @@
 //     Type_Fighter
 // };
 
+enum UnitType
+{
+    DUMMY_UNIT,
+    ALLY_UNIT,
+    ENEMY_UNIT,
+};
+
 enum EnemyType
 {
     ENEMY_TYPE_NONE,

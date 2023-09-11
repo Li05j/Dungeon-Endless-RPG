@@ -7,7 +7,7 @@ class Ally : public CombatUnits {
 private:
 
 public:
-	Ally();
+	Ally(UnitType type);
 	virtual ~Ally();
 
 	// debug use

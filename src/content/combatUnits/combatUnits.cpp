@@ -1,12 +1,17 @@
 #include "combatUnits.h"
 #include "./src/utils/debugUtils.h"
 
-CombatUnits::CombatUnits() : m_bp_growth(TOTAL_BASIC_PARAMS, -1), m_basic_params(TOTAL_BASIC_PARAMS, -1) {}
+CombatUnits::CombatUnits(UnitType type) : m_unit_type(type), m_bp_growth(TOTAL_BASIC_PARAMS, -1), m_basic_params(TOTAL_BASIC_PARAMS, -1) {
+}
 
 CombatUnits::~CombatUnits() {}
 
 int CombatUnits::getId() {
     return m_id;
+}
+
+UnitType CombatUnits::getUnitType() {
+    return m_unit_type;
 }
 
 std::string CombatUnits::getName() {
@@ -33,17 +38,22 @@ void CombatUnits::setName(std::string name) {
     m_name = name;
 }
 
-void CombatUnits::setBPGrowth(int bParamType, int param) {
-    m_bp_growth.at(bParamType) = param;
+void CombatUnits::setBPGrowth(int bParamType, int value) {
+    m_bp_growth.at(bParamType) = value;
     // initialize params
     if (bParamType == B_MAXHP) {
-        setBParam(B_CURRHP, param);
+        setBParam(B_CURRHP, value);
     }
-    setBParam(bParamType, param);
+    setBParam(bParamType, value);
 }
 
-void CombatUnits::setBParam(int bParamType, int param) {
-    m_basic_params.at(bParamType) = param;
+// void CombatUnits::setUnitType(UnitType type)
+// {
+//     m_unit_type = type;
+// }
+
+void CombatUnits::setBParam(int bParamType, int value) {
+    m_basic_params.at(bParamType) = value;
 }
 
 void CombatUnits::debugPrintUnitInfo() {

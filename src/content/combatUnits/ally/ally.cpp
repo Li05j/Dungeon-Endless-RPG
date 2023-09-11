@@ -2,7 +2,7 @@
 
 #include "./src/utils/debugUtils.h"
 
-Ally::Ally() : CombatUnits() {}
+Ally::Ally(UnitType type) : CombatUnits(type) {}
 
 Ally::~Ally() {}
 

@@ -22,7 +22,7 @@ void EnemyManager::populateEnemyData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;
-    Enemy currentEnemy;
+    Enemy currentEnemy(ENEMY_UNIT);
 
     while (std::getline(file, line)) {
         // DEBUG(DB_GENERAL, "populateEnemyData(): %s\n", line.c_str());

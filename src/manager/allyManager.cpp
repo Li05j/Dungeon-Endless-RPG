@@ -21,7 +21,7 @@ void AllyManager::populateAllyData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;
-    Ally currentAlly;
+    Ally currentAlly(ALLY_UNIT);
 
     while (std::getline(file, line)) {
         // DEBUG(DB_GENERAL, "Ally manager populateAllyData(): %s\n", line.c_str());
@@ -73,7 +73,7 @@ Ally AllyManager::getAlly(int allyId) {
 
 void AllyManager::debugPrintManagerInfo() {
     DEBUG(DB_GENERAL, "Ally Manager info...\n");
-    for (auto ally : m_allyData) {
+    for (auto& ally : m_allyData) {
         ally.debugPrintUnitInfo();
     }
     DEBUG(DB_GENERAL, "END\n");
