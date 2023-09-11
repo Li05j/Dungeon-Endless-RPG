@@ -6,7 +6,9 @@
 #include "./src/content/combatUnits/enemy/enemy.h"
 #include "./src/content/combatUnits/ally/ally.h"
 #include "./src/manager/battleManager.h"
+
 #include "./src/utils/debugUtils.h"
+#include "./src/utils/helperUtils.h"
 
 BattleView::BattleView(BattleManager& battleM) : m_battleM(battleM) {
     m_battleM.addObserver(this);
@@ -56,5 +58,6 @@ void BattleView::show() {
 }
 
 void BattleView::update() {
+    clearScreen();
     show();
 }

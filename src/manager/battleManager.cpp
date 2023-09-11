@@ -118,7 +118,7 @@ void BattleManager::preTurn()
 {
     m_move_order.clear();
     determineMoveOrder();
-    wait(1);
+    // wait(1);
 }
 
 void BattleManager::duringTurn()
@@ -128,22 +128,22 @@ void BattleManager::duringTurn()
         // TODO: below is dummy damage calculation. need to replace it to a meaningful one.
         if (unit->getUnitType() == ALLY_UNIT) {
             int enemyCurrHp = m_enemyBattle.at(0).getOneBParam(B_CURRHP);
-            m_enemyBattle.at(0).setBParam(B_CURRHP, enemyCurrHp - 10);
-            checkEnemyPartyWipe();
+            m_enemyBattle.at(0).setBParam(B_CURRHP, enemyCurrHp - 20);
         }
         else {
             int allyCurrHp = m_allyBattle.at(0).getOneBParam(B_CURRHP);
-            m_allyBattle.at(0).setBParam(B_CURRHP, allyCurrHp - 10);
-            checkAllyPartyWipe();
+            m_allyBattle.at(0).setBParam(B_CURRHP, allyCurrHp - 20);
         }
         notifyObservers();
+        checkEnemyPartyWipe();
+        checkAllyPartyWipe();
     }
 }
 
 void BattleManager::postTurn()
 {
     // do nothing for now;
-    wait(1);
+    // wait(1);
 }
 
 void BattleManager::checkAllyPartyWipe()
@@ -189,22 +189,12 @@ void BattleManager::determineMoveOrder()
     std::sort(m_move_order.begin(), m_move_order.end(), [](CombatUnits* a, CombatUnits* b) {
         return a->getOneBParam(BasicParamType::B_SPD) > b->getOneBParam(BasicParamType::B_SPD);
         });
-
-    //     for (int i = 0; i < m_allyBattle.size(); i++) {
-    //     int unit_spd = m_allyBattle.at(i).getOneBParam(BasicParamType::B_SPD);
-    //     std::tuple<UnitType, int, int> unit = std::make_tuple(UnitType::ALLY_UNIT, i, unit_spd);
-
-    //     int move_order_size = m_move_order.size();
-    //     m_move_order.push_back(unit);
-
-
-    // }
 }
 
 void BattleManager::incrementTurn()
 {
     m_turn_counter++;
-    // notifyObservers();
+    notifyObservers();
 }
 
 void BattleManager::endBattle() {
