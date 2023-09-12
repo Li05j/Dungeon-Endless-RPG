@@ -34,6 +34,16 @@ void BattleView::displayCombatUnitDetailedStats() {
     // TODO
 }
 
+void BattleView::displayBattleLogs()
+{
+    auto& logs = m_battleM.getBattleLogs();
+    std::cout << "Battle Logs:" << std::endl;
+    for (auto& log : logs) {
+        std::cout << log << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 void BattleView::init() {
     m_battleM.prepareBattle();
     // show();
@@ -55,6 +65,7 @@ void BattleView::show() {
     for (auto ally : allyBattle) { // TODO: same as above
         displayCombatUnitBasicStats(ally);
     }
+    displayBattleLogs();
 }
 
 void BattleView::update() {

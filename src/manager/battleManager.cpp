@@ -7,6 +7,7 @@
 #include "./src/manager/enemyManager.h"
 #include "./src/manager/playerInfoManager.h"
 #include "./src/manager/skillManager.h"
+#include "./src/manager/battleLoggerManager.h"
 
 #include "./src/content/combatUnits/enemy/enemy.h"
 #include "./src/content/combatUnits/ally/ally.h"
@@ -19,8 +20,9 @@ BattleManager::BattleManager(
     AllyManager& allyM,
     EnemyManager& enemyM,
     PlayerInfoManager& playerM,
-    SkillManager& skillM) :
-    m_allyM(allyM), m_enemyM(enemyM), m_playerM(playerM), m_skillM(skillM), m_turn_counter(0), m_gameover(0), m_victory(0)
+    SkillManager& skillM,
+    BattleLoggerManager& battleLogM) :
+    m_allyM(allyM), m_enemyM(enemyM), m_playerM(playerM), m_skillM(skillM), m_battleLogM(battleLogM), m_turn_counter(0), m_gameover(0), m_victory(0)
 {}
 
 BattleManager::~BattleManager() {}
@@ -29,10 +31,20 @@ BattleManager& BattleManager::getInstance(
     AllyManager& allyM,
     EnemyManager& enemyM,
     PlayerInfoManager& playerM,
-    SkillManager& skillM)
+    SkillManager& skillM,
+    BattleLoggerManager& battleLogM)
 {
-    static BattleManager instance(allyM, enemyM, playerM, skillM);
+    static BattleManager instance(allyM, enemyM, playerM, skillM, battleLogM);
     return instance;
+}
+
+std::string BattleManager::damageLog(std::string subject, std::string object, int damage, bool crit)
+{
+    std::string log = std::string();
+    if (!crit) {
+        log = subject + " dealt " + std::to_string(damage) + " damage to " + object + " !";
+    }
+    return log;
 }
 
 void BattleManager::addObserver(ObserverIface* observer) {
@@ -95,6 +107,16 @@ const std::vector<Enemy>& BattleManager::getEnemyBattle() const {
     return m_enemyBattle;
 }
 
+const std::deque<std::string>& BattleManager::getBattleLogs() const
+{
+    return m_battleLogM.getBattleLogs();
+}
+
+// void BattleManager::pushLog(std::string log)
+// {
+//     m_battleLogM.pushBattleLog(log);
+// }
+
 void BattleManager::prepareBattle() {
     m_turn_counter = 0;
     populateAllyBattle();
@@ -126,13 +148,18 @@ void BattleManager::duringTurn()
     // attack
     for (auto& unit : m_move_order) {
         // TODO: below is dummy damage calculation. need to replace it to a meaningful one.
+        auto& ally = m_allyBattle.at(0);
+        auto& enemy = m_enemyBattle.at(0);
+
         if (unit->getUnitType() == ALLY_UNIT) {
-            int enemyCurrHp = m_enemyBattle.at(0).getOneBParam(B_CURRHP);
-            m_enemyBattle.at(0).setBParam(B_CURRHP, enemyCurrHp - 20);
+            useDefaultAttack(ally, enemy, 20);
+        }
+        else if (unit->getUnitType() == ENEMY_UNIT) {
+            useDefaultAttack(enemy, ally, 20);
         }
         else {
-            int allyCurrHp = m_allyBattle.at(0).getOneBParam(B_CURRHP);
-            m_allyBattle.at(0).setBParam(B_CURRHP, allyCurrHp - 20);
+            // should'nt end up here
+            DEBUG(DB_GENERAL, "ERROR - unknown unit... name: %s\n", unit->getName().c_str());
         }
         notifyObservers();
         checkEnemyPartyWipe();
@@ -195,6 +222,13 @@ void BattleManager::incrementTurn()
 {
     m_turn_counter++;
     notifyObservers();
+}
+
+void BattleManager::useDefaultAttack(CombatUnits& subject, CombatUnits& object, int damage)
+{
+    int objectCurrHp = object.getOneBParam(B_CURRHP);
+    object.setBParam(B_CURRHP, objectCurrHp - 20);
+    m_battleLogM.pushBattleLog(damageLog(subject.getName(), object.getName(), 20)); // dummy damage number
 }
 
 void BattleManager::endBattle() {

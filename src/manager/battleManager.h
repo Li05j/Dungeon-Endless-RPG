@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <deque>
 
 #include "./src/interface/observerIface.h"
 #include "./src/interface/subjectIface.h"
@@ -14,6 +15,8 @@ class EnemyManager;
 class PlayerInfoManager;
 class SkillManager;
 
+class BattleLoggerManager;
+
 class Ally;
 class Enemy;
 class CombatUnits;
@@ -22,7 +25,7 @@ enum UnitType;
 
 class BattleManager : public SubjectIface {
 private:
-	BattleManager(AllyManager& allyM, EnemyManager& enemyM, PlayerInfoManager& playerM, SkillManager& skillM);
+	BattleManager(AllyManager& allyM, EnemyManager& enemyM, PlayerInfoManager& playerM, SkillManager& skillM, BattleLoggerManager& battleLogM);
 	virtual ~BattleManager();
 
 	BattleManager(BattleManager const&) = delete; // private copy constructor
@@ -32,6 +35,8 @@ private:
 	EnemyManager& m_enemyM;
 	PlayerInfoManager& m_playerM;
 	SkillManager& m_skillM;
+
+	BattleLoggerManager& m_battleLogM;
 
 	std::vector<Ally> m_allyBattle;
 	std::vector<Enemy> m_enemyBattle;
@@ -45,9 +50,11 @@ private:
 
 	ObserverIface* m_observer;
 
+	// init
 	void populateAllyBattle();
 	void populateEnemyBattle();
 
+	// flow
 	void startBattle();
 	void preTurn();
 	void duringTurn();
@@ -60,12 +67,21 @@ private:
 	void determineMoveOrder();
 	void incrementTurn();
 
+	// during turn.. damage calc
+	void useDefaultAttack(CombatUnits& subject, CombatUnits& object, int damage);
+
+	// logging
+	std::string damageLog(std::string subject, std::string object, int damage, bool crit = false);
+
 public:
-	static BattleManager& getInstance(AllyManager& allyM, EnemyManager& enemyM, PlayerInfoManager& playerM, SkillManager& skillM);
+	static BattleManager& getInstance(AllyManager& allyM, EnemyManager& enemyM, PlayerInfoManager& playerM, SkillManager& skillM, BattleLoggerManager& battleLogM);
 
 	const int getTurn() const;
 	const std::vector<Ally>& getAllyBattle() const;
 	const std::vector<Enemy>& getEnemyBattle() const;
+	const std::deque<std::string>& getBattleLogs() const;
+
+	// void pushLog(std::string log);
 
 	virtual void addObserver(ObserverIface* observer) override;
 	virtual void removeObserver(ObserverIface* observer) override;

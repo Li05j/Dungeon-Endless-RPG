@@ -18,6 +18,8 @@ class BattleView : ObserverIface {
 	void displayCombatUnitBasicStats(CombatUnits& unit);
 	void displayCombatUnitDetailedStats();
 
+	void displayBattleLogs();
+
 public:
 	static BattleView& getInstance(BattleManager& battleM);
 
