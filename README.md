@@ -9,9 +9,9 @@
 - Run **make**
 - Run **./zbuild/test**
 
-## Available Scripts
+## Available Scripts for Frontend
 
-In the project directory, you can run:
+In the frontend/ directory, you can run:
 
 ### `npm run start`
 
