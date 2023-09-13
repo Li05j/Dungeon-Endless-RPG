@@ -1,7 +1,9 @@
 // import './App.css';
 import { useState } from 'react';
+import BattleScene from "./component/BattleScene"
+import TestCrow from "./component/testCrow"
 
-function GameButton() {
+function App() {
   const [gameStarted, setGameStarted] = useState(false);
 
   return (
@@ -11,11 +13,11 @@ function GameButton() {
       ) : (
         // Render your game content here when gameStarted is true
         <div>
-          WOW! Time to start game owo
+          <TestCrow />
         </div>
       )}
     </div>
   );
 }
 
-export default GameButton;
+export default App;
