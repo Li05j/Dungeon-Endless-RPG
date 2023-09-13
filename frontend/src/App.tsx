@@ -1,23 +1,21 @@
-import './App.css';
+// import './App.css';
+import { useState } from 'react';
 
-function App() {
+function GameButton() {
+  const [gameStarted, setGameStarted] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!gameStarted ? (
+        <button onClick={() => setGameStarted(true)}>Start Game</button>
+      ) : (
+        // Render your game content here when gameStarted is true
+        <div>
+          WOW! Time to start game owo
+        </div>
+      )}
     </div>
   );
 }
 
-export default App;
+export default GameButton;
