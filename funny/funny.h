@@ -1,1 +1,0 @@
-#define mfor(s, r) for (int i = s; i < r; i++)
