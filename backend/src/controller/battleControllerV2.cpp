@@ -1,10 +1,14 @@
-#include "battleController.h"
+///////////////////////////// THIS IS FOR REACT /////////////////////////////
+
+#include "./battleControllerV2.h"
 
 #include <algorithm>
 // #include "./include/crow.h"
 
 #include "./src/blueprint/combatUnits/enemy/enemy.h"
 #include "./src/blueprint/combatUnits/ally/ally.h"
+
+#include "./src/interface/battleResponseIface.h"
 
 #include "./src/model/allyModel.h"
 #include "./src/model/battleModel.h"
@@ -15,8 +19,9 @@
 #include "./src/utils/debugUtils.h"
 #include "./src/utils/helperUtils.h"
 #include "./src/utils/playerUtils.h"
+#include "battleControllerV2.h"
 
-BattleController::BattleController(
+BattleControllerV2::BattleControllerV2(
 	BattleModel& battleM,
 	AllyModel& allyM,
 	EnemyModel& enemyM,
@@ -25,29 +30,30 @@ BattleController::BattleController(
 	m_battleM(battleM), m_allyM(allyM), m_enemyM(enemyM), m_playerM(playerM), m_battleLogM(battleLogM)
 {}
 
-BattleController::~BattleController() {}
+BattleControllerV2::~BattleControllerV2() {}
 
-BattleController& BattleController::getInstance(
+BattleControllerV2& BattleControllerV2::getInstance(
 	BattleModel& battleM,
 	AllyModel& allyM,
 	EnemyModel& enemyM,
 	PlayerInfoModel& playerM,
 	BattleLoggerModel& battleLogM)
 {
-	static BattleController instance(battleM, allyM, enemyM, playerM, battleLogM);
+	static BattleControllerV2 instance(battleM, allyM, enemyM, playerM, battleLogM);
 	return instance;
 }
 
-void BattleController::prepareBattle() {
+BattleResponseIface BattleControllerV2::prepareBattle() {
 	populateAllyBattle();
 	populateEnemyBattle();
 	m_battleM.resetbattleVictory();
 	m_battleM.resetMoveOrder();
 	m_battleM.resetTurnCounter();
-	startBattle();
+	// startBattle();
+	return fetchData();
 }
 
-void BattleController::startBattle()
+void BattleControllerV2::startBattle()
 {
 	while (!m_battleM.isBattleEnd()) {
 		m_battleM.incrementTurnCounter();
@@ -61,7 +67,7 @@ void BattleController::startBattle()
 	endBattle();
 }
 
-void BattleController::populateAllyBattle() {
+void BattleControllerV2::populateAllyBattle() {
 	const std::vector<int>& playerParty = m_playerM.getPlayerParty();
 	int allyCount = 0;
 	for (int i = 0; i < TOTAL_ALLY; i++) {
@@ -76,7 +82,7 @@ void BattleController::populateAllyBattle() {
 	}
 }
 
-void BattleController::populateEnemyBattle() {
+void BattleControllerV2::populateEnemyBattle() {
 	// TODO: random multiple enemies
 	// TODO: will need to check level/location etc to get appropriate enemies
 
@@ -84,14 +90,14 @@ void BattleController::populateEnemyBattle() {
 	m_battleM.pushEnemyForBattle(m_enemyM.getEnemy(randomEnemy));
 }
 
-void BattleController::preTurn()
+void BattleControllerV2::preTurn()
 {
 	m_battleM.resetMoveOrder();
 	// determineMoveOrder();
 	// wait(1);
 }
 
-void BattleController::duringTurn()
+void BattleControllerV2::duringTurn()
 {
 	// attack
 	auto& moveOrder = m_battleM.getMoveOrder();
@@ -123,13 +129,13 @@ void BattleController::duringTurn()
 	}
 }
 
-void BattleController::postTurn()
+void BattleControllerV2::postTurn()
 {
 	// do nothing for now;
 	// wait(1);
 }
 
-void BattleController::checkAllyPartyWipe()
+void BattleControllerV2::checkAllyPartyWipe()
 {
 	auto& allyBattle = m_battleM.getAllyBattle();
 	for (auto& unit : allyBattle) {
@@ -141,7 +147,7 @@ void BattleController::checkAllyPartyWipe()
 	m_battleM.resetMoveOrder();
 }
 
-void BattleController::checkEnemyPartyWipe()
+void BattleControllerV2::checkEnemyPartyWipe()
 {
 	auto& m_enemyBattle = m_battleM.getEnemyBattle();
 	for (auto& unit : m_enemyBattle) {
@@ -153,45 +159,36 @@ void BattleController::checkEnemyPartyWipe()
 	m_battleM.resetMoveOrder();
 }
 
-// bool BattleController::isEndBattle()
-// {
-// 	// DEBUG(DB_GENERAL, "Note -- isEndBattle(): gameover?: %d, victory?: %d\n", m_gameover, m_victory);
-// 	if (m_gameover || m_victory) {
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-// void BattleController::determineMoveOrder()
-// {
-// 	auto& allyBattle = m_battleM.getAllyBattle();
-// 	auto& enemyBattle = m_battleM.getEnemyBattle();
-// 	auto& moveOrder = m_battleM.getMoveOrder();
-
-// 	for (auto& unit : allyBattle) {
-// 		m_move_order.push_back(&unit);
-// 	}
-// 	for (auto& unit : enemyBattle) {
-// 		m_move_order.push_back(&unit);
-// 	}
-
-// 	std::sort(m_move_order.begin(), m_move_order.end(), [](CombatUnits* a, CombatUnits* b) {
-// 		return a->getOneBParam(BasicParamType::B_SPD) > b->getOneBParam(BasicParamType::B_SPD);
-// 		});
-// }
-
-void BattleController::useDefaultAttack(std::string subjectName, std::string targetName, UnitType targetUnitType, int targetIdx, int damage)
+void BattleControllerV2::useDefaultAttack(std::string subjectName, std::string targetName, UnitType targetUnitType, int targetIdx, int damage)
 {
 	m_battleLogM.pushBattleLog(damageLog(subjectName, targetName, 20)); // dummy damage number
 	m_battleM.changeUnitParam(targetUnitType, targetIdx, -damage);
 }
 
-void BattleController::endBattle() {
+void BattleControllerV2::endBattle() {
 	m_battleM.resetAllyBattle();
 	m_battleM.resetEnemyBattle();
 }
 
-std::string BattleController::damageLog(std::string subject, std::string object, int damage, bool crit)
+
+BattleResponseIface BattleControllerV2::fetchData()
+{
+	auto& ally = m_battleM.getAllyBattle().at(0); // 0 because there is only 1 ally/enemy
+	auto& enemy = m_battleM.getEnemyBattle().at(0);
+
+	int turn = m_battleM.getTurn();
+	std::string allyName = ally.getName();
+	int allyCurrHp = ally.getOneBParam(B_CURRHP);
+	int allyMaxHp = ally.getOneBParam(B_MAXHP);
+	std::string enemyName = enemy.getName();
+	int enemyCurrHp = enemy.getOneBParam(B_CURRHP);
+	int enemyMaxHp = enemy.getOneBParam(B_MAXHP);
+
+	BattleResponseIface response = BattleResponseIface(turn, allyName, allyCurrHp, allyMaxHp, enemyName, enemyCurrHp, enemyMaxHp);
+	return response;
+}
+
+std::string BattleControllerV2::damageLog(std::string subject, std::string object, int damage, bool crit)
 {
 	std::string log = std::string();
 	if (!crit) {
@@ -200,20 +197,20 @@ std::string BattleController::damageLog(std::string subject, std::string object,
 	return log;
 }
 
-// const int BattleController::getTurn() const
+// const int BattleControllerV2::getTurn() const
 // {
 // 	return m_battleM.getTurn();
 // }
 
-// const std::vector<Ally>& BattleController::getAllyBattle() const {
+// const std::vector<Ally>& BattleControllerV2::getAllyBattle() const {
 // 	return m_battleM.getAllyBattle();
 // }
 
-// const std::vector<Enemy>& BattleController::getEnemyBattle() const {
+// const std::vector<Enemy>& BattleControllerV2::getEnemyBattle() const {
 // 	return m_battleM.getEnemyBattle();
 // }
 
-const std::deque<std::string>& BattleController::getBattleLogs() const
+const std::deque<std::string>& BattleControllerV2::getBattleLogs() const
 {
 	return m_battleLogM.getBattleLogs();
 }

@@ -13,7 +13,7 @@ function App() {
       ) : (
         // Render your game content here when gameStarted is true
         <div>
-          <TestCrow />
+          <BattleScene />
         </div>
       )}
     </div>

@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 // import './App.css';
 const react_1 = require("react");
-const testCrow_1 = __importDefault(require("./component/testCrow"));
+const BattleScene_1 = __importDefault(require("./component/BattleScene"));
 function App() {
     const [gameStarted, setGameStarted] = (0, react_1.useState)(false);
     return ((0, jsx_runtime_1.jsx)("div", { children: !gameStarted ? ((0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: () => setGameStarted(true) }, { children: "Start Game" }))) : (
         // Render your game content here when gameStarted is true
-        (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(testCrow_1.default, {}) })) }));
+        (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(BattleScene_1.default, {}) })) }));
 }
 exports.default = App;

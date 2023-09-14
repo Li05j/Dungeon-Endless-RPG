@@ -1,4 +1,9 @@
 export interface BattleDataIFace {
-    message1: string;
-    message2: string;
+    turn: number;
+    allyName: string;
+    allyCurrHp: number;
+    allyMaxHp: number;
+    enemyName: string;
+    enemyCurrHp: number;
+    enemyMaxHp: number;
 }
