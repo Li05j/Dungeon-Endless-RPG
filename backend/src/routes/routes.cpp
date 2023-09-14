@@ -23,6 +23,7 @@ crow::response Routes::prepareResponse(BattleResponseIface data)
     x["enemyName"] = data.enemyName;
     x["enemyCurrHp"] = data.enemyCurrHp;
     x["enemyMaxHp"] = data.enemyMaxHp;
+    x["battleLogs"] = data.battleLogs;
 
     auto json_str = x.dump();
 

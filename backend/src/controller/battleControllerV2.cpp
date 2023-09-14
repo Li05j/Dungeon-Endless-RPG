@@ -183,8 +183,9 @@ BattleResponseIface BattleControllerV2::fetchData()
 	std::string enemyName = enemy.getName();
 	int enemyCurrHp = enemy.getOneBParam(B_CURRHP);
 	int enemyMaxHp = enemy.getOneBParam(B_MAXHP);
+	std::vector<std::string> battleLogs = { "hello", "so cool", "omg!" };
 
-	BattleResponseIface response = BattleResponseIface(turn, allyName, allyCurrHp, allyMaxHp, enemyName, enemyCurrHp, enemyMaxHp);
+	BattleResponseIface response = BattleResponseIface(turn, allyName, allyCurrHp, allyMaxHp, enemyName, enemyCurrHp, enemyMaxHp, battleLogs);
 	return response;
 }
 
