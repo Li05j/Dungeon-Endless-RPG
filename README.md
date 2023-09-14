@@ -5,13 +5,15 @@
 - Open [http://localhost:3000](http://localhost:3000) to view the frontend in your browser.
 
 ## Backend
-- Navigate to frontend/ (**cd backend**).
+- *Will write a script in the future, or use CMake to automate this.*
+- Install Crow: https://crowcpp.org/master/getting_started/setup/linux/.
+- After building Crow, navigate to backend/ (**cd backend**), then copy its include/ directory here.
 - Run **make**
 - Run **./zbuild/test**
 
 ## Run Backend Without Frontend UI (command-line only)
-- Instructions below are not clear. Will add an easier way to run backend with command line graphics only.
-- *Modify main.cpp and change all V2 classes to their vanilla counterparts. Then run v2.init().*
+- *Instructions below are not clear. Will add an easier way to run backend with command line graphics only.*
+- Modify main.cpp and change all V2 classes to their vanilla counterparts. Then run v2.init().
 
 ## Available Scripts for Frontend
 
