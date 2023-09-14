@@ -7,4 +7,5 @@ export interface BattleDataIFace {
     enemyCurrHp: number;
     enemyMaxHp: number;
     battleLogs: string[];
+    battleEnd: boolean;
 }

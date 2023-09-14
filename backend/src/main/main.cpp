@@ -1,7 +1,5 @@
 #include <iostream>
 
-// #include "./include/crow.h"
-
 #include "./src/blueprint/combatUnits/ally/ally.h"
 #include "./src/blueprint/combatUnits/enemy/enemy.h"
 #include "./src/blueprint/combatUnits/unitAttributes/skill.h"
@@ -42,6 +40,8 @@ int main()
 
     BattleControllerV2& c2 = BattleControllerV2::getInstance(b1, a1, e1, p1, l1);
     BattleViewV2& v2 = BattleViewV2::getInstance(b1, c2);
+    // BattleController& c2 = BattleController::getInstance(b1, a1, e1, p1, l1);
+    // BattleView& v2 = BattleView::getInstance(b1, c2);
 
     Routes routes = Routes(c2); // singleton?
 
@@ -57,9 +57,9 @@ int main()
     // std::cout << std::endl;
     // std::cout << std::endl;
 
-    // v1.init();
+    ///////////////////////////////////    ///////////////////////////////////    ///////////////////////////////////    ///////////////////////////////////
 
-    ///////////////////////////////////
+    // v2.init();
 
     // crow::SimpleApp app; //define your crow application
 

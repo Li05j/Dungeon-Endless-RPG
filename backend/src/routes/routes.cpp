@@ -24,6 +24,7 @@ crow::response Routes::prepareResponse(BattleResponseIface data)
     x["enemyCurrHp"] = data.enemyCurrHp;
     x["enemyMaxHp"] = data.enemyMaxHp;
     x["battleLogs"] = data.battleLogs;
+    x["battleEnd"] = data.battleEnd;
 
     auto json_str = x.dump();
 
@@ -39,6 +40,14 @@ void Routes::run()
         ([this]() {
 
         BattleResponseIface data = this->m_battleC_V2.prepareBattle();
+        crow::response response = prepareResponse(data);
+        return response;
+            });
+
+    CROW_ROUTE(app, "/nextTurn")
+        ([this]() {
+
+        BattleResponseIface data = this->m_battleC_V2.nextTurn();
         crow::response response = prepareResponse(data);
         return response;
             });

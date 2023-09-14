@@ -9,6 +9,10 @@
 - Run **make**
 - Run **./zbuild/test**
 
+## Run Backend Without Frontend UI (command-line only)
+- Instructions below are not clear. Will add an easier way to run backend with command line graphics only.
+- *Modify main.cpp and change all V2 classes to their vanilla counterparts. Then run v2.init().*
+
 ## Available Scripts for Frontend
 
 In the frontend/ directory, you can run:

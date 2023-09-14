@@ -64,6 +64,7 @@ public:
 	static BattleControllerV2& getInstance(BattleModel& battleM, AllyModel& allyM, EnemyModel& enemyM, PlayerInfoModel& playerM, BattleLoggerModel& battleLogM);
 
 	BattleResponseIface prepareBattle();
+	BattleResponseIface nextTurn();
 	// const int getTurn() const;
 	// const std::vector<Ally>& getAllyBattle() const;
 	// const std::vector<Enemy>& getEnemyBattle() const;

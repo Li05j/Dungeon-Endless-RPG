@@ -16,11 +16,14 @@ public:
 	int enemyCurrHp;
 	int enemyMaxHp;
 	std::vector<std::string> battleLogs;
+	bool battleEnd;
 
+	BattleResponseIface(std::vector<std::string> _battleLogs, bool _battleEnd) : turn(-1), allyName(""), allyCurrHp(-1), allyMaxHp(-1),
+		enemyName(""), enemyCurrHp(-1), enemyMaxHp(-1), battleLogs(_battleLogs), battleEnd(_battleEnd) {}
 	BattleResponseIface(int _turn, const std::string& _allyName, int _allyCurrHp, int _allyMaxHp,
-		const std::string& _enemyName, int _enemyCurrHp, int _enemyMaxHp, std::vector<std::string> _battleLogs)
+		const std::string& _enemyName, int _enemyCurrHp, int _enemyMaxHp, std::vector<std::string> _battleLogs, bool _battleEnd)
 		: turn(_turn), allyName(_allyName), allyCurrHp(_allyCurrHp), allyMaxHp(_allyMaxHp),
-		enemyName(_enemyName), enemyCurrHp(_enemyCurrHp), enemyMaxHp(_enemyMaxHp), battleLogs(_battleLogs) {}
+		enemyName(_enemyName), enemyCurrHp(_enemyCurrHp), enemyMaxHp(_enemyMaxHp), battleLogs(_battleLogs), battleEnd(_battleEnd) {}
 	virtual ~BattleResponseIface() {};
 };
 

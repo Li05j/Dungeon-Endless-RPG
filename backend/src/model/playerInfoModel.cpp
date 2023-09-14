@@ -20,6 +20,7 @@ PlayerInfoModel& PlayerInfoModel::getInstance(AllyModel& allyM) {
 }
 
 void PlayerInfoModel::addMemberToParty(int allyId) {
+    DEBUG(DB_GENERAL, "addMemberToParty() called\n");
     if (m_current_party_size == MAX_PARTY_SIZE) {
         DEBUG(DB_GENERAL, "ERROR -- addMemberToParty(): too many allies.\n");
         return;
