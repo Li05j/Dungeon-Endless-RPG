@@ -1,22 +1,22 @@
-#include "skillManager.h"
+#include "skillModel.h"
 
 #include <fstream>
 
-#include "./src/content/combatUnits/unitAttributes/skill.h"
+#include "./src/blueprint/combatUnits/unitAttributes/skill.h"
 #include "./src/utils/debugUtils.h"
 
-SkillManager::SkillManager() : m_dataFileName("./src/data/skill_data_test.txt") {
+SkillModel::SkillModel() : m_dataFileName("./src/data/skill_data_test.txt") {
     populateSkillData();
 }
 
-SkillManager::~SkillManager() {}
+SkillModel::~SkillModel() {}
 
-SkillManager& SkillManager::getInstance() {
-    static SkillManager instance;
+SkillModel& SkillModel::getInstance() {
+    static SkillModel instance;
     return instance;
 }
 
-Skill& SkillManager::getSkill(int skillId) {
+Skill& SkillModel::getSkill(int skillId) {
     if (skillId >= 0 && m_skillData.size() > skillId) {
         return m_skillData.at(skillId);
     }
@@ -24,7 +24,7 @@ Skill& SkillManager::getSkill(int skillId) {
     return m_skillData.at(0);
 }
 
-void SkillManager::populateSkillData() {
+void SkillModel::populateSkillData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;

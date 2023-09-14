@@ -3,25 +3,27 @@
 
 #include "./src/interface/observerIface.h"
 
-class BattleManager;
+class BattleModel;
+class BattleController;
 class CombatUnits;
 
 class BattleView : ObserverIface {
-	BattleView(BattleManager& battleM);
+	BattleView(BattleModel& battleM, BattleController& battleC);
 	virtual ~BattleView();
 
 	BattleView(BattleView const&) = delete; // private copy constructor
 	BattleView& operator=(BattleView const&) = delete; // private assignment operator
 
-	BattleManager& m_battleM;
+	BattleModel& m_battleM;
+	BattleController& m_battleC;
 
-	void displayCombatUnitBasicStats(CombatUnits& unit);
-	void displayCombatUnitDetailedStats();
+	const void displayCombatUnitBasicStats(const CombatUnits& unit) const;
+	const void displayCombatUnitDetailedStats() const;
 
 	void displayBattleLogs();
 
 public:
-	static BattleView& getInstance(BattleManager& battleM);
+	static BattleView& getInstance(BattleModel& battleM, BattleController& battleC);
 
 	void init();
 	void show();

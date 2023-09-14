@@ -2,26 +2,27 @@
 
 #include <iostream>
 
-#include "./src/content/combatUnits/combatUnits.h"
-#include "./src/content/combatUnits/enemy/enemy.h"
-#include "./src/content/combatUnits/ally/ally.h"
-#include "./src/manager/battleManager.h"
+#include "./src/blueprint/combatUnits/combatUnits.h"
+#include "./src/blueprint/combatUnits/enemy/enemy.h"
+#include "./src/blueprint/combatUnits/ally/ally.h"
+#include "./src/controller/battleController.h"
+#include "./src/model/battleModel.h"
 
 #include "./src/utils/debugUtils.h"
 #include "./src/utils/helperUtils.h"
 
-BattleView::BattleView(BattleManager& battleM) : m_battleM(battleM) {
+BattleView::BattleView(BattleModel& battleM, BattleController& battleC) : m_battleM(battleM), m_battleC(battleC) {
     m_battleM.addObserver(this);
 }
 
 BattleView::~BattleView() {}
 
-BattleView& BattleView::getInstance(BattleManager& battleM) {
-    static BattleView instance(battleM);
+BattleView& BattleView::getInstance(BattleModel& battleM, BattleController& battleC) {
+    static BattleView instance(battleM, battleC);
     return instance;
 }
 
-void BattleView::displayCombatUnitBasicStats(CombatUnits& unit) {
+const void BattleView::displayCombatUnitBasicStats(const CombatUnits& unit)const {
     std::string name = unit.getName();
     int maxhp = unit.getOneBParam(B_MAXHP);
     int currhp = unit.getOneBParam(B_CURRHP);
@@ -30,13 +31,13 @@ void BattleView::displayCombatUnitBasicStats(CombatUnits& unit) {
     std::cout << std::endl << std::endl;
 }
 
-void BattleView::displayCombatUnitDetailedStats() {
+const void BattleView::displayCombatUnitDetailedStats() const {
     // TODO
 }
 
 void BattleView::displayBattleLogs()
 {
-    auto& logs = m_battleM.getBattleLogs();
+    auto& logs = m_battleC.getBattleLogs();
     std::cout << "Battle Logs:" << std::endl;
     for (auto& log : logs) {
         std::cout << log << std::endl;
@@ -45,7 +46,7 @@ void BattleView::displayBattleLogs()
 }
 
 void BattleView::init() {
-    m_battleM.prepareBattle();
+    m_battleC.prepareBattle();
     // show();
 }
 
@@ -58,11 +59,11 @@ void BattleView::show() {
 
     std::cout << "Current Turn: " << turn << std::endl << std::endl;
 
-    for (auto enemy : enemyBattle) {  // TODO: need to change this to traditional for loop to avoid creating copies of enemy just to print stuff
+    for (auto& enemy : enemyBattle) {
         displayCombatUnitBasicStats(enemy);
     }
 
-    for (auto ally : allyBattle) { // TODO: same as above
+    for (auto& ally : allyBattle) {
         displayCombatUnitBasicStats(ally);
     }
     displayBattleLogs();

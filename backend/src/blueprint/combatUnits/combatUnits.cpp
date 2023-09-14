@@ -6,19 +6,19 @@ CombatUnits::CombatUnits(UnitType type) : m_unit_type(type), m_bp_growth(TOTAL_B
 
 CombatUnits::~CombatUnits() {}
 
-int CombatUnits::getId() {
+const int CombatUnits::getId() const {
     return m_id;
 }
 
-UnitType CombatUnits::getUnitType() {
+const UnitType CombatUnits::getUnitType() const {
     return m_unit_type;
 }
 
-std::string CombatUnits::getName() {
+const std::string CombatUnits::getName() const {
     return m_name;
 }
 
-int CombatUnits::getOneBParam(int bParamType) {
+const int CombatUnits::getOneBParam(int bParamType) const {
     if (TOTAL_BASIC_PARAMS > bParamType) {
         return m_basic_params[bParamType];
     }

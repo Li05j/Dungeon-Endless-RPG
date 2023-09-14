@@ -1,14 +1,16 @@
 #include <iostream>
-#include "./src/content/combatUnits/ally/ally.h"
-#include "./src/content/combatUnits/enemy/enemy.h"
-#include "./src/content/combatUnits/unitAttributes/skill.h"
+#include "./src/blueprint/combatUnits/ally/ally.h"
+#include "./src/blueprint/combatUnits/enemy/enemy.h"
+#include "./src/blueprint/combatUnits/unitAttributes/skill.h"
 
-#include "./src/manager/allyManager.h"
-#include "./src/manager/enemyManager.h"
-#include "./src/manager/battleManager.h"
-#include "./src/manager/playerInfoManager.h"
-#include "./src/manager/skillManager.h"
-#include "./src/manager/battleLoggerManager.h"
+#include "./src/controller/battleController.h"
+
+#include "./src/model/allyModel.h"
+#include "./src/model/enemyModel.h"
+#include "./src/model/battleModel.h"
+#include "./src/model/playerInfoModel.h"
+#include "./src/model/skillModel.h"
+#include "./src/model/battleLoggerModel.h"
 
 #include "./src/view/battleView.h"
 
@@ -20,22 +22,24 @@ int main()
 {
     std::cout << "compiled" << std::endl;
 
-    BattleLoggerManager& l1 = BattleLoggerManager::getInstance();
+    BattleLoggerModel& l1 = BattleLoggerModel::getInstance();
 
-    AllyManager& a1 = AllyManager::getInstance();
-    EnemyManager& e1 = EnemyManager::getInstance();
-    SkillManager& s1 = SkillManager::getInstance();
+    AllyModel& a1 = AllyModel::getInstance();
+    EnemyModel& e1 = EnemyModel::getInstance();
+    SkillModel& s1 = SkillModel::getInstance();
 
-    PlayerInfoManager& p1 = PlayerInfoManager::getInstance(a1);
-    BattleManager& b1 = BattleManager::getInstance(a1, e1, p1, s1, l1);
+    PlayerInfoModel& p1 = PlayerInfoModel::getInstance(a1);
+    BattleModel& b1 = BattleModel::getInstance();
 
-    BattleView& v1 = BattleView::getInstance(b1);
+    BattleController& c1 = BattleController::getInstance(b1, a1, e1, p1, l1);
 
-    // a1.debugPrintManagerInfo();
+    BattleView& v1 = BattleView::getInstance(b1, c1);
+
+    a1.debugPrintModelInfo();
 
     Enemy& them = e1.getEnemy(2);
     p1.addMemberToParty(1);
-    // p1.debugPrintPartyInfo();
+    p1.debugPrintPartyInfo();
 
     std::cout << std::endl;
     std::cout << std::endl;

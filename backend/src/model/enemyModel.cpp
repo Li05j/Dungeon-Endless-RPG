@@ -1,24 +1,24 @@
-#include "enemyManager.h"
+#include "enemyModel.h"
 
 #include <fstream>
 // #include <limits>
 
-#include "./src/content/combatUnits/enemy/enemy.h"
+#include "./src/blueprint/combatUnits/enemy/enemy.h"
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-EnemyManager::EnemyManager() : m_dataFileName("./src/data/enemy_data1.txt") {
+EnemyModel::EnemyModel() : m_dataFileName("./src/data/enemy_data1.txt") {
     populateEnemyData();
 }
 
-EnemyManager::~EnemyManager() {}
+EnemyModel::~EnemyModel() {}
 
-EnemyManager& EnemyManager::getInstance() {
-    static EnemyManager instance;
+EnemyModel& EnemyModel::getInstance() {
+    static EnemyModel instance;
     return instance;
 }
 
-void EnemyManager::populateEnemyData() {
+void EnemyModel::populateEnemyData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;
@@ -59,7 +59,7 @@ void EnemyManager::populateEnemyData() {
     }
 }
 
-Enemy& EnemyManager::getEnemy(int enemyId) {
+Enemy& EnemyModel::getEnemy(int enemyId) {
     if (enemyId >= 0 && m_enemyData.size() > enemyId) {
         return m_enemyData.at(enemyId);
     }
@@ -72,7 +72,7 @@ Enemy& EnemyManager::getEnemy(int enemyId) {
 //     DEBUG(DB_GENERAL, "getEnemyData() called %d\n", enemyId);
 //     if (m_enemyData.find(enemyId) == m_enemyData.end()) {
 //         // Enemy data not loaded, load from file
-//         std::ifstream file("./src/content/combatUnits/enemy/enemy_data1.txt");
+//         std::ifstream file("./src/blueprint/combatUnits/enemy/enemy_data1.txt");
 //         std::string line;
 //         Enemy currentEnemy;
 

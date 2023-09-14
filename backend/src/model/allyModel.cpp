@@ -1,30 +1,30 @@
-#include "allyManager.h"
+#include "allyModel.h"
 
 #include <fstream>
 
-#include "./src/content/combatUnits/ally/ally.h"
+#include "./src/blueprint/combatUnits/ally/ally.h"
 #include "./src/utils/combatUnitsUtils.h"
 #include "./src/utils/debugUtils.h"
 
-AllyManager::AllyManager() : m_dataFileName("./src/data/ally_data.txt") {
+AllyModel::AllyModel() : m_dataFileName("./src/data/ally_data.txt") {
     populateAllyData();
 }
 
-AllyManager::~AllyManager() {}
+AllyModel::~AllyModel() {}
 
-AllyManager& AllyManager::getInstance() {
-    static AllyManager instance;
+AllyModel& AllyModel::getInstance() {
+    static AllyModel instance;
     return instance;
 }
 
-void AllyManager::populateAllyData() {
+void AllyModel::populateAllyData() {
     std::ifstream file(m_dataFileName);
 
     std::string line;
     Ally currentAlly(ALLY_UNIT);
 
     while (std::getline(file, line)) {
-        // DEBUG(DB_GENERAL, "Ally manager populateAllyData(): %s\n", line.c_str());
+        // DEBUG(DB_GENERAL, "Ally Model populateAllyData(): %s\n", line.c_str());
         if (line.empty()) {
             m_allyData.push_back(currentAlly);
             continue;
@@ -58,11 +58,11 @@ void AllyManager::populateAllyData() {
     }
 }
 
-// int AllyManager::getTotalPlayableAllies() {
+// int AllyModel::getTotalPlayableAllies() {
 //     return m_allyData.size();
 // }
 
-Ally AllyManager::getAlly(int allyId) {
+Ally AllyModel::getAlly(int allyId) {
     // DEBUG(DB_GENERAL, "getAlly(), ally id is? %d...\n", allyId);
     if (allyId >= 0 && TOTAL_ALLY > allyId) {
         return m_allyData.at(allyId);
@@ -71,8 +71,8 @@ Ally AllyManager::getAlly(int allyId) {
     return m_allyData.at(0);
 }
 
-void AllyManager::debugPrintManagerInfo() {
-    DEBUG(DB_GENERAL, "Ally Manager info...\n");
+void AllyModel::debugPrintModelInfo() {
+    DEBUG(DB_GENERAL, "Ally Model info...\n");
     for (auto& ally : m_allyData) {
         ally.debugPrintUnitInfo();
     }

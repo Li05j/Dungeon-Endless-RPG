@@ -18,10 +18,10 @@ public:
 	CombatUnits(UnitType type);
 	virtual ~CombatUnits() = 0;
 
-	int getId();
-	UnitType getUnitType();
-	std::string getName();
-	int getOneBParam(int bParamType);
+	const int getId() const;
+	const UnitType getUnitType() const;
+	const std::string getName() const;
+	const int getOneBParam(int bParamType) const;
 	const std::vector<int>& getAllBParams() const;
 
 	void setId(int id);
