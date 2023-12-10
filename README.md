@@ -1,3 +1,9 @@
+## About
+
+  - This is a automatic Turn Based RPG with a C++ backend and React frontend.
+  - The player plays by defeating enemies -> get stronger.
+
+
 ## Frontend
 
 - Navigate to frontend/ (**cd frontend**).
